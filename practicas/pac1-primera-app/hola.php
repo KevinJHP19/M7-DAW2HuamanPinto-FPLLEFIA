@@ -20,9 +20,9 @@
             <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto nisi velit saepe at consectetur eligendi, omnis eum ipsa reiciendis perspiciatis minus est? Sit qui laboriosam nihil dolore doloribus officiis maxime!</li>
         </ul>
     <footer>
-        <¿php
-        echo '<p></p>'
- ¿>
+        <?php echo '<p>Kevin Jordan</p>' ?>
+        <?php echo '<p>19/09/2024</p>'  ?>
+ 
     </footer>
 
 
