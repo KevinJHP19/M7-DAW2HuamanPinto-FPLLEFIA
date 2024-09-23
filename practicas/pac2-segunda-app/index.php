@@ -9,7 +9,7 @@
             margin: 30px;
             background-color: skyblue;
             border: 5px groove white;
-            height: 350px;
+            height: 550px;
         }
         h1{
             text-align: center;
@@ -45,6 +45,12 @@
     <h2>Ejercicio 3</h2>
 
         <a href="ejecicio3/index.php">Haz click para ver el ejercio3</a>
+    <h2>Opcional 1</h2>
+
+        <a href="Opcional1/index.php">Haz click para ver el Opcional1</a>
+    <h2>Opcional 2</h2>
+
+        <a href="Opcional2/index.php">Haz click para ver el Opcional2</a>
     </head>
     
 </body>
