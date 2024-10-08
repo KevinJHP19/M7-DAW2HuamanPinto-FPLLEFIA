@@ -41,7 +41,7 @@ $frutas =[
             <?php
             if (isset($_GET['nom']) && isset($_GET['seleccion'])) {
                 $nombre = $_GET['nom'];
-                foreach ($frutas as &$fruta) { 
+                foreach ($frutas as $fruta) { 
                     if ($fruta['nombre'] == $nombre) {
                         $fruta['seleccionada'] = ($_GET['seleccion']);
                     }
