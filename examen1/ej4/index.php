@@ -6,7 +6,7 @@
     <title>Taula de productes amb ofertes destacades</title>
     <style>
         body{
-            align-items: center;
+            text-align: center;
             
         }
         table tr{
