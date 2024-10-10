@@ -50,7 +50,7 @@
     echo '<br>';
     //11. explode
 
-    //trasforma una cadena de n arra (inverso de implode)
+    //trasforma una cadena de en array (inverso de implode)
 
     $cadena = "Hola,Mundo,PHP";
     $array = explode(",",$cadena);
