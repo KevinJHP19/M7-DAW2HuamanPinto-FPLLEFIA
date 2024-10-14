@@ -3,11 +3,11 @@
 
     function generarSaludo($nombre){
         
-        $nombre = "Juan";
+        $texto = "<h1>Hola, " . $nombre . "!</h1>";
 
-        return($nombre);
+        return($texto);
 
     }
 
-    echo "<h1>Hola, ", generarSaludo("$nombre"),"!</h1>"
+    echo generarSaludo('Juan');
 ?>

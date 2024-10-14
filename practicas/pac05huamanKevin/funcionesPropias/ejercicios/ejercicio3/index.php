@@ -2,9 +2,11 @@
 
     function generarResumen($texto, $limite){
         
+        
+        $texto= substr($texto, 0 , $limite);
 
-        return($texto . $limite);
+        return($texto);
     }
-
-    echo  generarSaludo('Hola buenos dias',10)"...";
+    echo   generarResumen('Hola buenos dias a todos', 12) , "..."
+    
 ?>

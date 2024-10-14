@@ -2,16 +2,15 @@
 
 <?php
     function calcularTotal($precio, $cantidad, $impuesto){
+        $calculo= $precio * $cantidad;
 
-        $precio = 3.5;
-        $cantidad = 4;
-        $total=$precio * $cantidad;
-        $impuesto = $total *21/100;
+        $total= $calculo + $calculo*$impuesto; 
+        
          
-        return($precio*$cantidad+$impuesto);
+        return($total);
     }
 
-    echo "<h1>El precio total es: ",calcularTotal($precio, $cantidad, $impuesto),"</h1>"
+    echo "<h1>El precio total es: ",calcularTotal(30, 4, 21/100),"</h1>";
 
 
 ?>
