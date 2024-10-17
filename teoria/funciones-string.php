@@ -19,7 +19,7 @@
 
     echo strtolower($cadena);
     echo '<br>';
-    // 5. toupper
+    // 5. strtoupper
 
     echo strtoupper("$cadena");
     echo '<br>';
