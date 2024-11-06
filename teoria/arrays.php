@@ -39,7 +39,7 @@
             echo $numeros[$i] . "<br>";
         }
 
-        //Recorrer array con unforeach
+        //Recorrer array con un foreach
         $numero = [1,2,3,4,5,6,7,8,9];
         foreach($numero as $num){
         echo ($num * 2) . " ";
