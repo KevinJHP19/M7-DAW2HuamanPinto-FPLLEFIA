@@ -3,10 +3,12 @@
 session_start();
 
 if (isset($_POST['nombre']) && isset($_POST['dificultad'])) {
-    echo 'hola mundo ' . $_POST['nombre'] . '! Nivel: ' . $_POST['dificultad'] . '.';
-    // Guardo los datos en la sesión
     $_SESSION['nombre'] = $_POST['nombre'];
     $_SESSION['dificultad'] = $_POST['dificultad'];
+    header("Location: room1.php");
+    exit;
+    
+    
     
 }
 
@@ -29,7 +31,7 @@ if (isset($_POST['nombre']) && isset($_POST['dificultad'])) {
 <body class="d-flex justify-content-center align-items-center vh-100" style="background-image: url('https://basementescaperoom.com/los-angeles/template/images/room-header-bg-thebasement.jpg'); background-size:cover; background-repeat: no-repeat;">
     <div class="card p-4 bg-dark text-white" style="width: 22rem;">
         <h2 class="card-title text-center">Bienvenido!</h2>
-        <form action="room1.php" method="post">
+        <form  method="post">
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre:</label>
                 <input type="text" name="nombre" id="nombre" class="form-control" required>

@@ -1,69 +1,39 @@
 <?php
 
 session_start();
-
+        
 // Array de preguntes
 
-$nivel_info = [
-    "facil" => [
-        [
-            "preguntas" => "¿Cual es la capital de España?",
-            "respuestas" => "Madrid"
-        ],
-        [
-            "preguntas" => "¿Cual es la capital de Italia?",
-            "respuestas" => "Roma"
-        ],
-        [
-            "preguntas" => "¿Cual es la capital de Portugal?",
-            "respuestas" => "Lisboa"
-        ]
-    ],
-    "medio" => [
-        [
-            "preguntas" => "¿Cual es la capital de Croacia?",
-            "respuestas" => "Zagreb"
-        ],
-        [
-            "preguntas" => "¿Cual es la capital de Hungria?",
-            "respuestas" => "Budapest"
-        ],
-        [
-            "preguntas" => "¿Cual es la capital de Suecia?",
-            "respuestas" => "Estocolmo"
-        ]
-    ],
-    "dificil" => [
-        [
-            "preguntas" => "¿Cual es la capital de Senegal?",
-            "respuestas" => "Dakar"
+include 'include/array.php';
+$_SESSION['current_room'] = 1;
 
-        ],
-        [
-            "preguntas" => "¿Cual es la capital de Australia?",
-            "respuestas" => "Canberra"
-        ],
-        [
-            "preguntas" => "¿Cual es la capital de Nueva Zelanda?",
-            "respuestas" => "Wellington"
-        ]
-    ]
-];
-$_SESSION['current_room'] = 0;
+$imagenlogo = "imagenes/logoescaperrom.jpg";
+$logousuario = "imagenes/iconoavatar.png";
 
 //comparamos  la dificultad  para poder guardar las pregunta y respuesta en una variable
 
-if ($_SESSION['dificultad'] == "facil") {
-
+if($_SESSION['dificultad'] == "facil") {
     $pregunta = $nivel_info['facil'][0]['preguntas'];
     $respuesta = $nivel_info['facil'][0]['respuestas'];
-} else if ($_SESSION['dificultad'] == "medio") {
+}elseif($_SESSION['dificultad'] == "medio") {
+
     $pregunta = $nivel_info['medio'][0]['preguntas'];
     $respuesta = $nivel_info['medio'][0]['respuestas'];
-} else if ($_SESSION['dificultad'] == "dificil") {
+
+}elseif($_SESSION['dificultad'] == "dificil") {
     $pregunta = $nivel_info['dificil'][0]['preguntas'];
     $respuesta = $nivel_info['dificil'][0]['respuestas'];
 };
+
+$mensajedeerror= '';
+if (isset($_POST['respuesta']) && $_POST['respuesta'] == $respuesta || $_POST['respuesta'] == strtolower($respuesta)) {
+    $_SESSION['current_room']++;
+    header('Location: room2.php');
+    exit;
+
+} else {
+    $mensajedeerror= "<p class='alert alert-danger mt-3'>Error intentalo de nuevo</p>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -76,8 +46,10 @@ if ($_SESSION['dificultad'] == "facil") {
 </head>
 
 <body>
+    <?php include "include/header.php"; ?>
     <div class="container-fluid text-center text-white bg-dark rounded-3 ps-3 pe-3 ms-3 me-3 pb-3">
         <h1>Bienvenido al Room1!</h1>
+        
         <p>Estás en la habitación Room1, una sala para adivinar la capital del pais depende al nivel.</p>
         <form method="post">
             <label for="pregunta" class="form-label"><?= $pregunta ?></label>
@@ -85,13 +57,9 @@ if ($_SESSION['dificultad'] == "facil") {
             <button type="submit" class="btn btn-primary">Adivinar</button>
         </form>
         <?php
-        if (isset($_POST['respuesta']) && $_POST['respuesta'] == $respuesta) {
-            echo "<p class='alert alert-success'>Correcto!</p>";
-            // header('Location: room2.php');
-        } else {
-            echo "<p class='alert alert-danger'>Error intentalo de nuevo</p>";
-            $_POST['respuesta'] = "";
-        }
+        if($mensajedeerror && $_POST['respuesta']){
+            echo $mensajedeerror;  
+        }        
 
         ?>
 
