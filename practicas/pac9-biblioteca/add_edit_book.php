@@ -1,12 +1,11 @@
 <?php
     session_start();
-    
 
-    if (!isset($_SESSION['username'])){
-        header( 'location login.php');
-        exit;
-        
-    }
+
+if (!isset($_SESSION['username']) && !isset($_SESSION['password'])) {
+    header('Location: login.php');
+    exit;
+}
 include 'functions.php';
 if ($_SESSION['role'] = 'admin') {
     $mensajerol = '' . strtoupper($_SESSION['role']) . '';
@@ -59,7 +58,7 @@ if (isset($_GET['id'])) {
 <body>
     <!-- Encabezado del formulario -->
     <header class="bg-light py-3 mb-4 shadow-sm">
-        <div class="container d-flex align-items-center justify-content-between">
+        <div class="container d-flex align-items-center justify-content-between ">
             <div>
                 <h4 class="m-0">👋 Bienvenido, <?php echo $mensajerol ?></h4>
                 

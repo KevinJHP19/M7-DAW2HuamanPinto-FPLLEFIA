@@ -1,7 +1,6 @@
 <?php
  session_start();
  include 'functions.php';
- echo $_SESSION['username'] . " con el rol: ". $_SESSION['rol'] . "<img src=" . $_SESSION['urlimagen'] ." alt='' width='20px' height='20px'>";
 // Verifica si el usuario ha iniciado sesión; si no, redirige a login.php.
     if(!isset($_SESSION['username'] ) && !isset($_SESSION['password'])) {
         header('Location: login.php');
