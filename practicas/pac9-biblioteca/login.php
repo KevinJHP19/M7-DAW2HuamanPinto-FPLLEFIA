@@ -26,12 +26,9 @@ foreach ($usuarios as $usuario) {
 
             header('Location: home.php');
             exit;
-        } else {
-            $mensajedeerror = "<p class='alert alert-danger mt-3 text-color-white'>Por favor, introduce correctamente tu nombre de usuario o contraseña.</p>";
-              
-        }  
+        } 
  }
-    echo $mensajedeerror;
+    
 }
 
 
