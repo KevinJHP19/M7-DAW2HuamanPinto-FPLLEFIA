@@ -5,14 +5,14 @@ class Baraja{
 
 
     public function crear_baraja(){
-        foreach(['red','yellow','blue',' green'] as $color){
+        foreach(['red','yellow','blue','green'] as $color){
             for($i=1;$i<=9; $i++){
                 $this->conjunto_cartas[] = new Carta($color,$i);
             }
             //Añadimos las cartas especiales
             $this->conjunto_cartas[] = new Carta($color, 'reverse');
             $this->conjunto_cartas[] = new Carta($color,'skip');
-            $this->conjunto_cartas[] = new Carta($color,'+2');
+            $this->conjunto_cartas[] = new Carta($color,'picker');
         }
     }
     public function mezcla(){

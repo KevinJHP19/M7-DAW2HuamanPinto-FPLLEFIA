@@ -63,8 +63,8 @@ class campeones
         
     }
 }
-class jugador {
-    public $nombredejugador;
+class jugadr {
+    
     public $campeonseleccionado;
     public function __construct($nombredejugador){
         $this->nombredejugador = $nombredejugador;

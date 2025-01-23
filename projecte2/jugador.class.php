@@ -1,28 +1,20 @@
 <?php
-class Jugador{
-    public $mano;
+class Jugador {
     public $id;
-    
+    public $mano; // Instancia de Baraja
 
-    public function agregar_carta($carta): void{
-        
-        array_push($this->mano,$carta);
-
+    public function __construct() {
+        $this->mano = new Baraja(); // Crear una nueva baraja para la mano del jugador
+        $this->mano->conjunto_cartas = []; // Asegurarse de que inicie vacía
     }
-    public function eliminar_carta($carta){
-        
-        $key = array_search($carta, $this->mano);
-        if($key != false){
-            unset($this->mano[$key]);
-        }
 
-        
+    public function agregar_carta($carta): void {
+        array_push($this->mano->conjunto_cartas, $carta); // Añadir carta a la baraja de la mano
     }
-    public function mostrar_mano(){
-        
-        foreach($this->mano as $carta){
-            return $carta->pinta_carta(). "<br>";
-        }
 
+    public function mostrar_mano() {
+        // Mostrar las cartas en la mano
+        return $this->mano->conjunto_cartas;
     }
 }
+?>
