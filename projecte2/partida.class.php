@@ -10,6 +10,14 @@ class Partida{
     public $array_jugadores;
     public $constante_sentido;
 
+    public function jugar(){
+
+        
+
+        
+
+    }
+
     
 
 }

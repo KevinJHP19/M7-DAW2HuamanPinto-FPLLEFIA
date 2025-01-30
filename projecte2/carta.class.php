@@ -17,7 +17,8 @@ class Carta{
          alt='" . $this->palo . $this->numero ."'></a>" ;
     }
     public function pinta_carta_girada(){
-        return "<img src='cartas_uno/carta_girada.png' alt='Cartagirada'>"; 
+        return "<img src='cartas_uno/". $this->numero . "_" . $this->palo . ".png' 
+         alt='" . $this->palo . $this->numero ."' width='92px' height='138px'> ";
 
     }
 }

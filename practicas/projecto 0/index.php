@@ -29,9 +29,7 @@ class Biblioteca{
             return $this->arraylibros;
         }
     }
-    public function buscarlibroportitulo(){
-        
-    }
+    
     
 
 

@@ -6,7 +6,8 @@ if (isset($_POST["numplayer"]) && isset($_POST["numcard"])) {
 
     include "jugador.class.php";
     include "baraja.class.php";
-
+    include "partida.class.php";
+    
     $baraja = new Baraja();
     $baraja->crear_baraja();
     $baraja->mezcla();
@@ -31,20 +32,33 @@ if (isset($_POST["numplayer"]) && isset($_POST["numcard"])) {
     <div class="container">
         <div class='d-flex'>
 <?php
+$partida = new Partida();
+$partida->numeros_baraja = $_SESSION["numcard"];
+$_SESSION["turno"] = $partida->turno;
 for ($i = 1; $i <= $_SESSION["numplayer"]; $i++) {
     // Crear un nuevo jugador
     $jugador = new Jugador();
-    $jugador->id = "jugador" . $i;
+    $jugador->id=$i;
+    $partida->numero_jugadores = "jugador".$i;
+    
+    $_SESSION["turno"] = $i;
+
+    if($_SESSION["turno"] == $_SESSION["numplayer"]) {
+        $_SESSION["turno"] = 1;
+    
+    }
+
     $jugadores[] = $jugador;
     
     
     echo "<div class='jugador card ' style='width: 18rem;'>";
-    echo "<h3 class='card-title text-white bg-primary p-3 text-center'>$jugador->id</h3>";
+    echo "<h3 class='card-title text-white bg-primary p-3 text-center'>".$partida->numero_jugadores ." = ". $partida->numeros_baraja ." cartas</h3>";
     echo "<div class='card-body d-flex flex-column align-items-center'>";
     
 
-    for ($j = 1; $j <= $_SESSION["numcard"]; $j++) {
+    for ($j = 1; $j <= $partida->numeros_baraja; $j++) {
         // Repartir cartas al jugador actual
+
         $carta_index = rand(0, count($baraja->conjunto_cartas) - 1);
         $jugador->agregar_carta($baraja->conjunto_cartas[$carta_index]);
         array_splice($baraja->conjunto_cartas, $carta_index, 1);
@@ -68,8 +82,8 @@ for ($i = 1; $i <= $_SESSION["numplayer"]; $i++) {
         <div class="d-flex flex-wrap">
     <?php
     
-    
-    $baraja->pinta_baraja();
+    $cartavolteada = new Carta('girada','carta');
+    echo $cartavolteada->pinta_carta_girada();
      
     ?></div>
     </div>
