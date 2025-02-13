@@ -22,12 +22,32 @@
     }
     include 'header.php';
 ?>
+<style>
+    main{
+        height: 880px;
+    }
+</style>
+<main> 
 <div id="estructural">
 
     <div class="container">
         <div class="container-fluid w-50">
             <h1 class="text-center fw-bold">Patrones creacionales</h1>
-            <p>Los patrones estructurales son técnicas para diseñar estructuras de software. Cada patrón es similar a un diseño que se puede aplicar para diseñar estructuras de software. Los patrones estructurales se describen con mucha formalidad para que se pueda reproducir en muchos contextos.</p>
+            <p>
+            Estos patrones proporcionan mecanismos de creación de objetos que incrementan la flexibilidad y la reutilización del código existente.
+            <div class="row text-center">
+                <div class="col">
+                    <h3>Factory</h3>
+                    <img src="./images/factory-method-mini.png" alt="" class="img-fluid">
+                    
+                </div>
+                <div class="col">
+                    <h3>Singleton</h3>
+                    <img src="./images/singleton-mini.png" alt="" class="img-fluid">
+                    
+                </div>
+            </div>
+            </p>
         </div>
         <div class="container w-75">
             <form action="" method="POST">
@@ -43,6 +63,7 @@
     </div>
     
     </div>
+    </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
