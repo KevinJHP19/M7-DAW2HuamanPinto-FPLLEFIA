@@ -1,6 +1,6 @@
 <header class="navigation fixed-top">
   <nav class="navbar navbar-expand-lg navbar-dark">
-    <a class="navbar-brand" href="index.html">ExploraVia</a>
+    <a class="navbar-brand" href="index.php">ExploraVia</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
       aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -20,7 +20,6 @@
         <li class="nav-item">
           <a class="nav-link" href="news.php">News</a>
         </li>
-        
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
           <div class="dropdown-menu">
@@ -30,6 +29,22 @@
         <li class="nav-item">
           <a class="nav-link" href="contact.php">Contact</a>
         </li>
+        <?php if(isset($_SESSION['user_id'])): ?>
+          <li class="nav-item">
+            <img src="<?php echo $_SESSION['user_avatar']; ?>" alt="Avatar" class="rounded-5 img-fluid" style="width: 50px; height: 50px; border-radius: 50%;">
+          </li>
+          <li class="nav-item">
+            <span class="text-white nav-link">Bienvenido, <?php echo $_SESSION['user_name']; ?>!</span>
+          </li>
+          <li class="nav-item">
+            <a href="logout.php" class="btn btn-primary">Cerrar sesión</a>
+          </li>
+          <?php if($_SESSION['user_rol'] == 'admin'): ?>
+            <li class="nav-item">
+              <a href="admin/admin.php"><img src="./images/admin.png" alt="" width="50" height="50"></a>
+            </li>
+          <?php endif; ?>
+        <?php endif; ?>
       </ul>
     </div>
   </nav>

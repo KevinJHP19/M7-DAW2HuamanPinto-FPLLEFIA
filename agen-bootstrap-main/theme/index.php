@@ -73,15 +73,7 @@
    <header class="bg-secondary d-flex justify-content-center align-items-center">
     <h1 class="fw-bold text-white">
       <nav class="d-flex align-items-center">
-        <?php if(isset($_SESSION['user_id'])):?>
-          <img src="<?php echo $_SESSION['user_avatar']?>" alt="">
-          <span class="text-white mx-2">Bienvenido, <?php echo $_SESSION['user_name']?>!</span>
-          <a href="logout.php" class="btn btn-primary">Cerrar sesion</a>
-          
-          <?php if($_SESSION['user_rol'] == 'admin'):?>
-            <a href="admin.php" class="btn btn-primary"><img src="" alt="">Administrar</a>
-            <?php endif;?>
-          <?php endif;?>
+        
 
       </nav>
 

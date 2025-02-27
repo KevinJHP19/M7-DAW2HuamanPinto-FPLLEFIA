@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once './config.php';
 
 $noticias = $mysqli->query("SELECT * FROM NEWS ORDER BY id ");
