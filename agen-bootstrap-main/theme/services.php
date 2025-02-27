@@ -51,7 +51,7 @@
   <div class="container">
     <div class="row">
       <div class="col-12 text-center">
-        <h1 class="display-1 text-white font-weight-bold font-primary">Our Services</h1>
+        <h1 class="display-1 text-white font-weight-bold font-primary">Nuestros Servicios</h1>
       </div>
     </div>
   </div>

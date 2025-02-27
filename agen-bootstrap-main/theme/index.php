@@ -1,15 +1,23 @@
 <?php
+  session_start();
   require_once 'config.php';
 
   $result = $mysqli->query("SELECT * FROM NEWS ORDER BY id DESC");
-  var_dump($result);
-
-  $noticias = $result->fetch_all(MYSQLI_ASSOC);
 
   
-  echo '<pre>';
-  print_r($noticias);
-  echo '</pre>';
+  $noticias = $result->fetch_all(MYSQLI_ASSOC);
+  
+  $consultaproyecto = $mysqli->query("SELECT * FROM PROJECTS ORDER BY id");
+
+  $proyectos = $consultaproyecto->fetch_all(MYSQLI_ASSOC);
+
+  $consulta3noticias = $mysqli->query("SELECT * FROM NEWS ORDER BY data_publicacio DESC LIMIT 3");
+
+  $ultimanoticias = $consulta3noticias->fetch_all(MYSQLI_ASSOC);
+
+  
+
+  
 
   
 ?>
@@ -22,41 +30,12 @@
  // FACEBOOK: https://www.facebook.com/themefisher
  // GITHUB: https://github.com/themefisher/
 -->
-<table>
-  <thead>
-    <td>id</td>
-    <td>titulo</td>
-    <td>subtitulo</td>
-    <td>thumnail</td>
-    <td>descripcion</td>
-    <td>fecha de publicacion</td>
-  </thead>
-  <tbody>
-    <?php
-      foreach($noticias as $noticia){
-        echo '<tr>';
-        echo '<td>'. $noticia['id']. '</td>';
-        echo '<td>'. $noticia['tittle']. '</td>';
-        echo '<td>'. $noticia['subtittle']. '</td>';
-        echo '<td>'. $noticia['thumbnail']. '</td>';
-        echo '<td>'. $noticia['descripcion']. '</td>';
-        echo '<td>'. $noticia['data_publicacio']. '</td>';
-        echo '</tr>';
-        
 
-
-        
-
-
-      }
-    ?>
-  </tbody>
-</table>
 <html lang="zxx">
 
 <head>
   <meta charset="utf-8">
-  <title>Agen | Bootstrap Agency Template</title>
+  <title> ExploraVia</title>
 
   <!-- mobile responsive meta -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -91,6 +70,24 @@
 
   <!-- header -->
    <?php include 'header.php'; ?>
+   <header class="bg-secondary d-flex justify-content-center align-items-center">
+    <h1 class="fw-bold text-white">
+      <nav class="d-flex align-items-center">
+        <?php if(isset($_SESSION['user_id'])):?>
+          <img src="<?php echo $_SESSION['user_avatar']?>" alt="">
+          <span class="text-white mx-2">Bienvenido, <?php echo $_SESSION['user_name']?>!</span>
+          <a href="logout.php" class="btn btn-primary">Cerrar sesion</a>
+          
+          <?php if($_SESSION['user_rol'] == 'admin'):?>
+            <a href="admin.php" class="btn btn-primary"><img src="" alt="">Administrar</a>
+            <?php endif;?>
+          <?php endif;?>
+
+      </nav>
+
+    </h1>
+
+   </header>
 
 
 <!-- banner -->
@@ -99,7 +96,7 @@
   <div class="container">
     <div class="row">
       <div class="col-12 text-center">
-        <h1 class="display-1 text-white font-weight-bold font-primary">Creative Agency</h1>
+        <h1 class="display-1 text-white font-weight-bold font-primary">ExploraVia</h1>
       </div>
     </div>
   </div>
@@ -111,7 +108,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-10 mx-auto text-center">
-        <h2 class="section-title">Our Services</h2>
+        <h2 class="section-title">Nuestros servicios</h2>
         <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
           labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
           aliquip ex ea commodo consequat.</p>
@@ -312,51 +309,20 @@
     </div>
 
     <div class="row no-gutters shuffle-wrapper">
-      <div class="col-lg-4 col-md-6 shuffle-item">
-        <div class="project-item">
-          <img src="images/project/project-1.jpg" alt="project-image" class="img-fluid w-100">
-          <div class="project-hover bg-secondary px-4 py-3">
-            <a href="#" class="text-white h4">Project title</a>
-            <a href="#"><i class="ti-link icon-xs text-white"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 shuffle-item">
-        <div class="project-item">
-          <img src="images/project/project-2.jpg" alt="project-image" class="img-fluid w-100">
-          <div class="project-hover bg-secondary px-4 py-3">
-            <a href="#" class="text-white h4">Project title</a>
-            <a href="#"><i class="ti-link icon-xs text-white"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 shuffle-item">
-        <div class="project-item">
-          <img src="images/project/project-3.jpg" alt="project-image" class="img-fluid w-100">
-          <div class="project-hover bg-secondary px-4 py-3">
-            <a href="#" class="text-white h4">Project title</a>
-            <a href="#"><i class="ti-link icon-xs text-white"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 shuffle-item">
-        <div class="project-item">
-          <img src="images/project/project-4.jpg" alt="project-image" class="img-fluid w-100">
-          <div class="project-hover bg-secondary px-4 py-3">
-            <a href="#" class="text-white h4">Project title</a>
-            <a href="#"><i class="ti-link icon-xs text-white"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 shuffle-item">
-        <div class="project-item">
-          <img src="images/project/project-5.jpg" alt="project-image" class="img-fluid w-100">
-          <div class="project-hover bg-secondary px-4 py-3">
-            <a href="#" class="text-white h4">Project title</a>
-            <a href="#"><i class="ti-link icon-xs text-white"></i></a>
-          </div>
-        </div>
-      </div>
+      
+      <?php
+        foreach($proyectos as $proyecto){
+          echo '<div class="col-lg-4 col-md-6 shuffle-item">';
+          echo '<div class="project-item">';
+          echo '<img src="'.$proyecto['thumbnail'].'" alt="project-image" class="img-fluid w-100" width=200px height=200px>';
+          echo '<div class="project-hover bg-secondary px-4 py-3">';
+          echo '<a href="#" class="text-white h4">'.$proyecto['tittle'].'</a>';
+          echo '<a href="#"><i class="ti-link icon-xs text-white"></i></a>';
+          echo '</div>';
+          echo '</div>';
+          echo '</div>';
+        }
+      ?>
     </div>
   </div>
 </section>
@@ -443,39 +409,21 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-        <article class="card">
-          <img src="images/blog/post-1.jpg" alt="post-thumb" class="card-img-top mb-2">
-          <div class="card-body p-0">
-            <time>January 15, 2018</time>
-            <a href="blog-single" class="h4 card-title d-block my-3 text-dark hover-text-underline">How These Different
-              Book Covers Reflect the Design</a>
-            <a href="#" class="btn btn-transparent">Read more</a>
-          </div>
-        </article>
-      </div>
-      <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-        <article class="card">
-          <img src="images/blog/post-2.jpg" alt="post-thumb" class="card-img-top mb-2">
-          <div class="card-body p-0">
-            <time>January 15, 2018</time>
-            <a href="blog-single" class="h4 card-title d-block my-3 text-dark hover-text-underline">How These Different
-              Book Covers Reflect the Design</a>
-            <a href="#" class="btn btn-transparent">Read more</a>
-          </div>
-        </article>
-      </div>
-      <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-        <article class="card">
-          <img src="images/blog/post-3.jpg" alt="post-thumb" class="card-img-top mb-2">
-          <div class="card-body p-0">
-            <time>January 15, 2018</time>
-            <a href="blog-single" class="h4 card-title d-block my-3 text-dark hover-text-underline">How These Different
-              Book Covers Reflect the Design</a>
-            <a href="#" class="btn btn-transparent">Read more</a>
-          </div>
-        </article>
-      </div>
+      <?php
+      foreach($ultimanoticias as $ultimanoticia){
+        echo '<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">';
+        echo '<article class="card">';
+        echo '<img src="'.$ultimanoticia['thumbnail'].'" alt="post-thumb" class="card-img-top mb-2" width=200px height=200px>';
+        echo '<div class="card-body p-0">';
+        echo '<time>'.date('F j, Y', strtotime($ultimanoticia['data_publicacio'])).'</time>';
+        echo '<a href="blog-single" class="h4 card-title d-block my-3 text-dark hover-text-underline">'.$ultimanoticia['tittle'].'</a>';
+        echo '<a href="#" class="btn btn-transparent">Read more</a>';
+        echo '</div>';
+        echo '</article>';
+        echo '</div>';
+      }
+      
+      ?>
     </div>
   </div>
 </section>

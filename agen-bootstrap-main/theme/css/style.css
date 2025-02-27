@@ -50,10 +50,12 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Noto Sans", sans-serif;
   font-weight: 700;
   line-height: 1.2;
+  
 }
 
 h1, .h1 {
   font-size: 60px;
+  text-shadow: 2px 2px 2px #000;
 }
 @media (max-width: 575px) {
   h1, .h1 {
@@ -154,12 +156,12 @@ h6, .h6 {
 }
 
 .btn-secondary {
-  background: #07085d;
+  background: #2C3E50;
   color: #fff;
   border: 0;
 }
 .btn-secondary:active, .btn-secondary:hover, .btn-secondary.focus, .btn-secondary.active {
-  background: #07085d !important;
+  background: #2C3E50 !important;
   color: #fff;
   border: 0;
 }
@@ -284,7 +286,7 @@ a:hover {
 .section-border {
   height: 9px;
   width: 220px;
-  background: linear-gradient(37deg, rgb(180, 62, 121) 1%, rgb(247, 70, 58) 100%);
+  background: linear-gradient(37deg, #D4AF37 1%, #ECF0F1 100%);
   border-radius: 5px;
   margin: 40px auto 90px;
 }
@@ -342,7 +344,7 @@ a:hover {
   width: 100%;
   top: 0;
   left: 0;
-  background: #07085d;
+  background: #2C3E50;
   opacity: 0.8;
 }
 .overlay-secondary-half {
@@ -355,7 +357,7 @@ a:hover {
   width: 100%;
   top: 0;
   left: 0;
-  background: linear-gradient(to right, #07085d 60%, transparent);
+  background: linear-gradient(to right, #2C3E50 60%, transparent);
 }
 .overlay-image {
   position: absolute;
@@ -378,7 +380,7 @@ a:hover {
 }
 
 .bg-secondary {
-  background: #07085d !important;
+  background: #2C3E50 !important;
 }
 
 .text-primary {
@@ -386,7 +388,7 @@ a:hover {
 }
 
 .text-secondary {
-  color: #07085d !important;
+  color: #2C3E50 !important;
 }
 
 .text-gradient-primary {
@@ -518,7 +520,7 @@ textarea.form-control {
   font-size: 14px;
   left: 0;
   top: 0px;
-  color: #07085d;
+  color: #2C3E50;
   transition: 0.3s ease;
 }
 
@@ -529,7 +531,7 @@ textarea.form-control {
   width: 50px;
   border-radius: 50%;
   line-height: 50px;
-  background: #07085d;
+  background: #2C3E50;
   color: #fff;
   text-align: center;
 }
@@ -540,7 +542,7 @@ textarea.form-control {
   transition: 0.3s ease;
 }
 .navigation.nav-bg {
-  background-color: #07085d;
+  background-color: #2C3E50;
   padding: 15px 100px;
 }
 @media (max-width: 991px) {
@@ -551,7 +553,7 @@ textarea.form-control {
 @media (max-width: 991px) {
   .navigation {
     padding: 20px;
-    background: #07085d;
+    background: #2C3E50;
   }
 }
 
@@ -610,13 +612,13 @@ textarea.form-control {
   transition: inherit;
 }
 .hover-bg-secondary:hover {
-  background: #07085d;
+  background: #2C3E50;
 }
 .hover-bg-secondary:hover * {
   color: #fff;
 }
 .hover-bg-secondary.active {
-  background: #07085d;
+  background: #2C3E50;
 }
 .hover-bg-secondary.active * {
   color: #fff;
