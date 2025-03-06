@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt = $mysqli->prepare("INSERT INTO TESTIMONIONS (foto, name, subname, descripcion, rating) VALUES (?,?,?,?,?)");
     $stmt->bind_param("ssssi", $foto, $name, $subname, $descripcion, $rating);
     if($stmt->execute()){
-        echo 'Testimonial añadido correctamente';
+        header('Location:../admin.php');
     } else {
         echo 'Error al añadir el testimonial';
     }
@@ -35,23 +35,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add testimonial</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-    <h1>Add testimonial</h1>
-    <form action="" method="post">
-        <label for="">Foto</label>
-        <input type="text" name="foto"><br>
-        <label for="">Nombre</label>
-        <input type="text" name="name"><br>
-        <label for="">Apellido</label><br>
-        <input type="text" name="subname"><br>
-
-        <label for="">Comentario</label>
-        <textarea name="descripcion" id="" cols="30" rows="10"></textarea><br>
-        <label for="">Puntuación</label>
-        <input type="number" name="rating" max=5><br>
-        <input type="submit" value="Guardar">    
-    </form>
+<div class="container mt-5">
+        <h1 class="mb-4">Añadir Testimonial</h1>
+        <form action="" method="post">
+            <div class="mb-3">
+                <label for="foto" class="form-label">Foto</label>
+                <input type="text" class="form-control" id="foto" name="foto" required>
+            </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="subname" class="form-label">Apellido</label>
+                <input type="text" class="form-control" id="subname" name="subname" required>
+            </div>
+            <div class="mb-3">
+                <label for="descripcion" class="form-label">Comentario</label>
+                <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="rating" class="form-label">Puntuación</label>
+                <input type="number" class="form-control" id="rating" name="rating" max="5" min="1" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+0I5gybF5b5yD1Fq4u5Kk5tBT5j5" crossorigin="anonymous"></script>
     
 </body>
 </html>

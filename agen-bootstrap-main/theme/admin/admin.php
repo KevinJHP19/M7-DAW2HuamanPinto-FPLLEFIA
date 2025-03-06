@@ -49,7 +49,7 @@
                 echo '<td>'.$testimonial['subname'].'</td>';
                 echo '<td>'.$testimonial['descripcion'].'</td>';
                 echo '<td>'.$testimonial['rating'].'</td>';
-                echo '<td><a class="btn btn-success href="testimonials/edit-testimonial.php?id='.$testimonial['id'].'">Editar</a></td>';
+                echo '<td><a class="btn btn-success" href="testimonials/edit-testimonial.php?id='.$testimonial['id'].'">Editar</a></td>';
                 echo '<td><a class="btn btn-danger"href="testimonials/delete-testimonial.php?id='.$testimonial['id'].'">Borrar</a></td>';
 
                 echo '</tr>';
@@ -114,6 +114,7 @@
             <th>Subtitulo</th>
             <th>Descripcion</th>
             <th>Imagen</th>
+            <th>Fecha de publicacion</th>
 
         </tr>
         <?php
@@ -123,6 +124,7 @@
             echo '<td>'.$new['descripcion'].'</td>';
             echo '<td>'.$new['subtittle'].'</td>';
             echo '<td><a href='.$new['thumbnail'].'><img src="'.$new['thumbnail'].'" alt="" width=80px height=50px></a></td>';
+            echo '<td>'.$new['data_publicacio'].'</td>';
             echo '<td><a class="btn btn-success href="news/edit-new.php?id='.$new['id'].'">Editar</a></td>';
             echo '<td><a class="btn btn-danger"href="news/delete-new.php?id='.$new['id'].'">Borrar</a></td>';
             echo '</tr>';
