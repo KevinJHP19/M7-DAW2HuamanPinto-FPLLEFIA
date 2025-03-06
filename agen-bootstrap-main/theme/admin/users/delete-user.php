@@ -10,12 +10,12 @@ if ($_SESSION['user_rol'] != 'admin') {
 //2. agarramos el id
 $id = $_GET['id'];
 //3. Ejecutar la consulta
-$stmt = $mysqli->prepare("DELETE FROM NEWS WHERE id = ?");
+$stmt = $mysqli->prepare("DELETE FROM USERS WHERE id = ?");
 $stmt->bind_param("i", $id);
 if($stmt->execute()){
     header('Location:../admin.php');
 } else {
-    echo 'Error al eliminar la noticia';
+    echo 'Error al eliminar el usuario';
 }
 $stmt->close();
 $mysqli->close();
