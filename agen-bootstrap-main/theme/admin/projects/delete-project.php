@@ -13,7 +13,7 @@ $id = $_GET['id'];
 $stmt = $mysqli->prepare("DELETE FROM PROJECTS WHERE id = ?");
 $stmt->bind_param("i", $id);
 if($stmt->execute()){
-    header('Location:../admin.php');
+    header('Location: ./adminprojects.php');
 } else {
     echo 'Error al eliminar el proyecto';
 }

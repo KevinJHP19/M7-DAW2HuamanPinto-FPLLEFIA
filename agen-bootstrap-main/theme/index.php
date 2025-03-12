@@ -1,6 +1,11 @@
 <?php
   session_start();
+
   require_once 'config.php';
+  if(!isset($_SESSION['user_id'])){
+    header('Location: login.php');
+    exit();
+  }
   
 
   $result = $mysqli->query("SELECT * FROM NEWS ORDER BY id DESC");
@@ -14,13 +19,7 @@
 
   $consulta3noticias = $mysqli->query("SELECT * FROM NEWS ORDER BY data_publicacio DESC LIMIT 3");
 
-  $ultimanoticias = $consulta3noticias->fetch_all(MYSQLI_ASSOC);
-
-  
-
-  
-
-  
+  $ultimanoticias = $consulta3noticias->fetch_all(MYSQLI_ASSOC); 
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +36,7 @@
 <head>
   <meta charset="utf-8">
   <title> ExploraVia</title>
-
+  <script src="https://kit.fontawesome.com/147cf78807.js" crossorigin="anonymous"></script>
   <!-- mobile responsive meta -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -63,6 +62,17 @@
   <!--Favicon-->
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
   <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <style>
+    .nav-item a:hover i {
+      animation: rotar 2s infinite linear;
+    }
+    @keyframes rotar{
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+            100% { transform: rotate(360deg); }
+
+        }
+  </style>
 
 </head>
 

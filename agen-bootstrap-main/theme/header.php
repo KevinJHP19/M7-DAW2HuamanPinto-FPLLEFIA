@@ -41,8 +41,13 @@
           </li>
           <?php if($_SESSION['user_rol'] == 'admin'): ?>
             <li class="nav-item">
-              <a href="admin/admin.php"><img src="./images/admin.png" alt="" width="50" height="50"></a>
+              <a href="admin/admin.php"  width=100px height=100px style="color: gray; font-size: 50px; margin-left:10px;"><i class="fa-solid fa-gear" ></i></a>
             </li>
+            
+          
+          <?php else:?>
+
+
           <?php endif; ?>
         <?php endif; ?>
       </ul>

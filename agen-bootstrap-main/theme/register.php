@@ -42,45 +42,68 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-     <!-- ** Plugins Needed for the Project ** -->
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css">
-  <!-- slick slider -->
-  <link rel="stylesheet" href="plugins/slick/slick.css">
-  <!-- themefy-icon -->
-  <link rel="stylesheet" href="plugins/themify-icons/themify-icons.css">
-  <!-- venobox css -->
-  <link rel="stylesheet" href="plugins/venobox/venobox.css">
-  <!-- card slider -->
-  <link rel="stylesheet" href="plugins/card-slider/css/style.css">
-
-  <!-- Main Stylesheet -->
-  <link href="css/style.css" rel="stylesheet">
-  
-  <!--Favicon-->
-  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <title>Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-    <form action="" method="post">
-        <label for="Nombres">Nombres:</label>
-        <input type="text" id="Nombres" name="Nombres" required>
-
-        <label for="Apellidos">Apellidos:</label>
-        <input type="text" id="Apellidos" name="Apellidos" required>
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="Avatar">Avatar:</label>
-        <input type="text" id="avatar" name="avatar" required>
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-
-        <input type="submit" value="Registrarse">
-    </form>
+    <div class="container mt-5">
+        <h2>Registro</h2>
+        <form action="" method="post" class="needs-validation" novalidate>
+            <div class="mb-3">
+                <label for="Nombres" class="form-label">Nombres:</label>
+                <input type="text" class="form-control" id="Nombres" name="Nombres" required>
+                <div class="invalid-feedback">
+                    Por favor, ingrese sus nombres.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="Apellidos" class="form-label">Apellidos:</label>
+                <input type="text" class="form-control" id="Apellidos" name="Apellidos" required>
+                <div class="invalid-feedback">
+                    Por favor, ingrese sus apellidos.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+                <div class="invalid-feedback">
+                    Por favor, ingrese un email válido.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="avatar" class="form-label">Avatar:</label>
+                <input type="text" class="form-control" id="avatar" name="avatar" required>
+                <div class="invalid-feedback">
+                    Por favor, ingrese un avatar.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+                <div class="invalid-feedback">
+                    Por favor, ingrese una contraseña.
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrarse</button>
+        </form>
+    </div>
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict'
+            var forms = document.querySelectorAll('.needs-validation')
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
     
 </body>
 </html>
