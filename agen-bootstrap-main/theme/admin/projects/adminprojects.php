@@ -24,7 +24,13 @@
 <body>
     <main class="">
         <div class="container text-center">
-            <h1>Tabla proyectos</h1>
+          <div class="titulo d-flex justify-content-between p-3">
+          <a href="../admin.php"><i class="fa-solid fa-arrow-right-to-bracket fs-5 text-black"></i></a>
+          <h1>Tabla proyectos</h1>
+          <p></p>
+
+          </div>
+            
             <div class="text-center mt-3 mb-3">
                     <a type="button" class="btn btn-outline-success ps-5 pe-5 pt-2 pb-2"  style="width: 50%;" data-bs-toggle="modal" data-bs-target="#exampleModal" >Añadir proyecto</a>
             </div>

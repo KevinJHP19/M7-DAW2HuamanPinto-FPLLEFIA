@@ -52,7 +52,12 @@
 <body>
     
 <div class="container">
-    <h1 class="text-center">Panel de admin</h1>
+<div class="titulo d-flex justify-content-between p-3">
+          <a href="../index.php"><i class="fa-solid fa-arrow-right-to-bracket fs-5 text-black"></i></a>
+          <h1>Panel admin</h1>
+          <p></p>
+
+          </div>
     <div class="row text-center">
         <div class="col-6 p-5">
             <a href="./testimonials/admintestimonial.php" class="btn btn-outline-primary p-3">Testimonios<i class="fa-solid fa-users"></i></a>

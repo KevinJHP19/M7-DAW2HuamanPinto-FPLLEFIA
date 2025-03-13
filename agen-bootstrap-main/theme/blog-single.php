@@ -1,6 +1,18 @@
 <?php
+session_start();
+require_once './config.php';
 
-require_once './config.php'
+if(!isset($_SESSION['user_id'])){
+  header('Location: login.php');
+  exit();
+}
+$id_noticia = $_GET['id'];
+
+$noticia = $mysqli->query("SELECT * FROM NEWS WHERE id = $id_noticia");
+
+$noticia = $noticia->fetch_assoc();
+
+
 
 
 ?>
@@ -54,7 +66,7 @@ require_once './config.php'
   <div class="container">
     <div class="row">
       <div class="col-12 text-center">
-        <h1 class="display-1 text-white font-weight-bold font-primary">Blog Details</h1>
+        <h1 class="display-1 text-white font-weight-bold font-primary">Detalles de noticia</h1>
       </div>
     </div>
   </div>
@@ -65,10 +77,10 @@ require_once './config.php'
   <div class="container">
     <div class="row">
       <div class="col-lg-10 mx-auto">
-        <h3 class="font-tertiary mb-5">What should be the proper purpose of UI and UX design?</h3>
-        <img src="images/blog/post-1.jpg" alt="post-thumb" class="img-fluid w-100 mb-3">
+        <h3 class="font-tertiary mb-5"><?php echo $noticia['tittle']?></h3>
+        <img src="<?php echo $noticia['thumbnail']?>" alt="post-thumb" class="img-fluid w-100 mb-3">
         <p class="float-left mr-4">Post by Themefisher</p>
-        <p>May 26, 2017</p>
+        <p><?php echo $noticia['data_publicacio']?></p>
         <div class="content">
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
             dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
