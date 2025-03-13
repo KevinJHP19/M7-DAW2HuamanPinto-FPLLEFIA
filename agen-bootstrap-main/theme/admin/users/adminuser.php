@@ -5,6 +5,7 @@
         echo 'No tiene el rol sea administrador';
         exit();
     }
+    require './add-user.php';
         
 
     $users = $mysqli->query("SELECT * FROM USERS");
@@ -74,22 +75,26 @@
       </div>
       <div class="modal-body">
     <form action="" method="POST">
-      <div class="mb-3">
-        <label for="title" class="form-label">Titulo:</label>
-        <input type="text" id="title" name="title" class="form-control" required>
-      </div>
-      <div class="mb-3">
-        <label for="url" class="form-label">URL:</label>
-        <input type="text" id="url" name="url" class="form-control" required>
-      </div>
-      <div class="mb-3">
-        <label for="description" class="form-label">Descripcion:</label>
-        <textarea name="description" id="description" class="form-control" rows="3" required></textarea>
-      </div>
-      <div class="mb-3">
-        <label for="image" class="form-label">Imagen:</label>
-        <input type="text" id="thumbnail" name="thumbnail" class="form-control" required>
-      </div>
+    <div class="mb-3">
+                <label for="name" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="subname" class="form-label">Apellido</label>
+                <input type="text" class="form-control" id="subname" name="subname" required>
+            </div>
+            <div class="mb-3">
+                <label for="Avatar" class="form-label">Avatar</label>
+                <input type="text" class="form-control" id="Avatar" name="Avatar" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="rol" class="form-label">Rol</label>
+                <input type="text" class="form-control" id="rol" name="rol" required>
+            </div>
         
         
         <input type="submit" class="btn btn-primary text-center" value="Enviar">
