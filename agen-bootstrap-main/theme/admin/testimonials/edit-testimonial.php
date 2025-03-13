@@ -11,8 +11,8 @@ if ($_SESSION['user_rol'] != 'admin') {
 //2. agarramos el id
 $id = $_GET['id'];
 //3. Ejecutar la consulta
-$proyecto = $mysqli->query("SELECT * FROM TESTIMONIONS WHERE id = $id");
-$proyecto = $proyecto->fetch_assoc();
+$testimonios = $mysqli->query("SELECT * FROM TESTIMONIONS WHERE id = $id");
+$testimonios = $testimonios->fetch_assoc();
 
 
 //4. Validar los datos
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt = $mysqli->prepare("UPDATE TESTIMONIONS SET foto=?,name=?,subname=?, descripcion=?, rating=? WHERE id=?");
     $stmt->bind_param("ssssii", $foto, $name, $subname, $descripcion, $rating, $id);
     if($stmt->execute()){
-        header('Location:../admin.php');
+        header('Location: ./admintestimonial.php');
     } else {
         echo 'Error al actualizar el testimonial';
     }
@@ -50,27 +50,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
 <div class="container mt-5">
-        <h1 class="mb-4">Añadir Testimonial</h1>
+        <h1 class="mb-4">Editar Testimonial</h1>
         <form action="" method="post">
             <div class="mb-3">
                 <label for="foto" class="form-label">Foto</label>
-                <input type="text" class="form-control" id="foto" name="foto" value="<?php echo $proyecto['foto']?>" required>
+                <input type="text" class="form-control" id="foto" name="foto" value="<?php echo $testimonios['foto']?>" required>
             </div>
             <div class="mb-3">
                 <label for="name" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="name" name="name" value="<?php echo $proyecto['name']?>" required>
+                <input type="text" class="form-control" id="name" name="name" value="<?php echo $testimonios['name']?>" required>
             </div>
             <div class="mb-3">
                 <label for="subname" class="form-label">Apellido</label>
-                <input type="text" class="form-control" id="subname" name="subname" value="<?php echo $proyecto['subname']?>" required>
+                <input type="text" class="form-control" id="subname" name="subname" value="<?php echo $testimonios['subname']?>" required>
             </div>
             <div class="mb-3">
                 <label for="descripcion" class="form-label">Comentario</label>
-                <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required><?php echo $proyecto['descripcion']?></textarea>
+                <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required><?php echo $testimonios['descripcion']?></textarea>
             </div>
             <div class="mb-3">
                 <label for="rating" class="form-label">Puntuación</label>
-                <input type="number" class="form-control" id="rating" name="rating" max="5" min="1" value="<?php echo $proyecto['rating']?>" required>
+                <input type="number" class="form-control" id="rating" name="rating" max="5" min="1" value="<?php echo $testimonios['rating']?>" required>
             </div>
             <button type="submit" class="btn btn-primary">Guardar</button>
         </form>

@@ -11,12 +11,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt = $mysqli->prepare("INSERT INTO PROJECTS (tittle, url, thumbnail,descripcion) VALUES (?,?,?,?)");
     $stmt->bind_param("ssss", $title, $url, $thumbnail, $description);
     if($stmt->execute()){
-        
-        
+        header('Location:./adminprojects.php');
+
     } else {
         die('Error en la ejecucion: '. $stmt->error);
     }
     $stmt->execute();
-    $mysqli->close();
+    
 }
 ?>

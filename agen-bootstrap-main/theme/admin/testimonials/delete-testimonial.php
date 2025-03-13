@@ -13,7 +13,7 @@ $id = $_GET['id'];
 $stmt = $mysqli->prepare("DELETE FROM TESTIMONIONS WHERE id = ?");
 $stmt->bind_param("i", $id);
 if($stmt->execute()){
-    header('Location:../admin.php');
+    header('Location:./admintestimonial.php');
 } else {
     echo 'Error al eliminar el testimonial';
 }

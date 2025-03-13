@@ -1,0 +1,1 @@
+/* editaremos nombre subname avatar , correo y rol */
