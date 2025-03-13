@@ -12,6 +12,11 @@ $noticia = $mysqli->query("SELECT * FROM NEWS WHERE id = $id_noticia");
 
 $noticia = $noticia->fetch_assoc();
 
+$consulta3noticias = $mysqli->query("SELECT * FROM NEWS ORDER BY data_publicacio DESC LIMIT 3");
+
+$ultimanoticias = $consulta3noticias->fetch_all(MYSQLI_ASSOC); 
+
+$comentarios = $mysqli->query("SELECT * FROM COMMENTS")
 
 
 
@@ -82,14 +87,7 @@ $noticia = $noticia->fetch_assoc();
         <p class="float-left mr-4">Post by Themefisher</p>
         <p><?php echo $noticia['data_publicacio']?></p>
         <div class="content">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-            laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-            dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-            consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est.</p>
+          <p><?php echo $noticia['descripcion']?></p>
           <strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
             et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
             ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
@@ -189,42 +187,25 @@ $noticia = $noticia->fetch_assoc();
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-        <article class="card">
-          <img src="images/blog/post-1.jpg" alt="post-thumb" class="card-img-top mb-2">
-          <div class="card-body p-0">
-            <time>January 15, 2018</time>
-            <a href="blog-single" class="h4 card-title d-block my-3 text-dark hover-text-underline">How These Different
-              Book Covers Reflect the Design</a>
-            <a href="#" class="btn btn-transparent">Read more</a>
-          </div>
-        </article>
-      </div>
-      <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-        <article class="card">
-          <img src="images/blog/post-2.jpg" alt="post-thumb" class="card-img-top mb-2">
-          <div class="card-body p-0">
-            <time>January 15, 2018</time>
-            <a href="blog-single" class="h4 card-title d-block my-3 text-dark hover-text-underline">How These Different
-              Book Covers Reflect the Design</a>
-            <a href="#" class="btn btn-transparent">Read more</a>
-          </div>
-        </article>
-      </div>
-      <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-        <article class="card">
-          <img src="images/blog/post-3.jpg" alt="post-thumb" class="card-img-top mb-2">
-          <div class="card-body p-0">
-            <time>January 15, 2018</time>
-            <a href="blog-single" class="h4 card-title d-block my-3 text-dark hover-text-underline">How These Different
-              Book Covers Reflect the Design</a>
-            <a href="#" class="btn btn-transparent">Read more</a>
-          </div>
-        </article>
-      </div>
+      <?php
+      foreach($ultimanoticias as $ultimanoticia){
+        echo '<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">';
+        echo '<article class="card">';
+        echo '<img src="'.$ultimanoticia['thumbnail'].'" alt="post-thumb" class="card-img-top mb-2" width=200px height=200px>';
+        echo '<div class="card-body p-0">';
+        echo '<time>'.date('F j, Y', strtotime($ultimanoticia['data_publicacio'])).'</time>';
+        echo '<a href="blog-single" class="h4 card-title d-block my-3 text-dark hover-text-underline">'.$ultimanoticia['tittle'].'</a>';
+        echo '<a href="#" class="btn btn-transparent">Read more</a>';
+        echo '</div>';
+        echo '</article>';
+        echo '</div>';
+      }
+      
+      ?>
     </div>
   </div>
 </section>
+<!-- /blog -->
 <!-- /blog -->
 
 <!-- footer -->
