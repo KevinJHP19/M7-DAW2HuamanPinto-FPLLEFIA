@@ -49,18 +49,19 @@
         </tr>
 
         <?php
-        foreach ($users as $user) {
-            echo '<tr>';
-            echo '<td><img src="'.$user['avatar'].'" alt="" width=50px height=50px></td>';
-            echo '<td>'.$user['name'].'</td>';
-            echo '<td>'.$user['subname'].'</td>';
-            echo '<td>'.$user['email'].'</td>';
-            echo '<td>'.$user['rol'].'</td>';
-            echo '<td><a class="btn btn-success" href="edit-user.php?id='.$user['id'].'"><i class="fa-solid fa-pen-to-square"></i></a></td>';
-            echo '<td><a class="btn btn-danger"href="delete-user.php?id='.$user['id'].'"><i class="fa-solid fa-trash"></a></td>';
-            echo '</tr>';
-        }
-        ?>
+        
+       foreach ($users as $user) {
+        echo '<tr>';
+        echo '<td><img src="../../' . $user['avatar'] . '" alt="" width="50px" height="50px"></td>';
+        echo '<td>' . $user['name'] . '</td>';
+        echo '<td>' . $user['subname'] . '</td>';
+        echo '<td>' . $user['email'] . '</td>';
+        echo '<td>' . $user['rol'] . '</td>';
+        echo '<td><a class="btn btn-success" href="edit-user.php?id=' . $user['id'] . '"><i class="fa-solid fa-pen-to-square"></i></a></td>';
+        echo '<td><a class="btn btn-danger" href="delete-user.php?id=' . $user['id'] . '"><i class="fa-solid fa-trash"></i></a></td>';
+        echo '</tr>';
+    }
+    ?>
     </table>
             </div>
             </div>
@@ -74,7 +75,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
     <div class="mb-3">
                 <label for="name" class="form-label">Nombre</label>
                 <input type="text" class="form-control" id="name" name="name" required>
@@ -85,7 +86,7 @@
             </div>
             <div class="mb-3">
                 <label for="Avatar" class="form-label">Avatar</label>
-                <input type="text" class="form-control" id="Avatar" name="Avatar" required>
+                <input type="file" class="form-control" id="Avatar" name="avatar" required>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>

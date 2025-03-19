@@ -1,13 +1,41 @@
 <?php
 session_start();
 require_once './config.php';
+$uploadDir = 'uploads/avatars/';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //recoger datos del formulario
     $nombre = $_POST['Nombres'];
     $apellido = $_POST['Apellidos'];
     $email = $_POST['email'];
-    $avatar = $_POST['avatar'];
+    
     $password = $_POST['password'];
+
+    if(isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK){
+        $fileTmpPath = $_FILES['avatar']['tmp_name'];
+        $fileName = $_FILES['avatar']['name'];
+
+        $fileNameCmps = explode(".", $fileName);
+        $fileExtension = strtolower(end($fileNameCmps));
+
+        $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+        if(in_array($fileExtension, $allowedExtensions)){
+            $newFileName = md5(time() . $fileName). '.'. $fileExtension;
+            //Ruta final en carpeta uploads
+            $dest_path = $uploadDir . $newFileName;
+            //Mover el archivo de la caerpeta temporal a la carpeta uploads
+            if(!move_uploaded_file($fileTmpPath, $dest_path)){
+                die('Error al mover el archivo');
+            };
+        }else {
+            die('Formato de archivo no permitido');
+        }
+    } else{
+        die('Error al subir el archivo');
+    }
+
+            
+    
+    
     //2. cifrar la paswword con password_hash
     $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
     //3.Prepara la consulta antes de insertar para evitar el sql injection
@@ -20,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die('Error en la preparacion: ' . $mysqli->error);
     }
     //5. Bindear los parametos
-    $stmt->bind_param('sssss',$nombre,$apellido,$email,$avatar,$passwordHashed);
+    $stmt->bind_param('sssss',$nombre,$apellido,$email,$dest_path,$passwordHashed);
     //6. Ejecutar la consulta
     if($stmt->execute()){
         echo 'Registro exitoso';
@@ -30,12 +58,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
     $mysqli->close();
     }
-    
-    
-
-
-
 }
+    
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div class="container mt-5">
         <h2>Registro</h2>
-        <form action="" method="post" class="needs-validation" novalidate>
+        <form action="" method="post" class="needs-validation" enctype="multipart/form-data" novalidate>
             <div class="mb-3">
                 <label for="Nombres" class="form-label">Nombres:</label>
                 <input type="text" class="form-control" id="Nombres" name="Nombres" required>
@@ -72,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="mb-3">
                 <label for="avatar" class="form-label">Avatar:</label>
-                <input type="text" class="form-control" id="avatar" name="avatar" required>
+                <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*" required>
                 <div class="invalid-feedback">
                     Por favor, ingrese un avatar.
                 </div>

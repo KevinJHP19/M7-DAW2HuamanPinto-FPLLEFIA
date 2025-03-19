@@ -2,6 +2,7 @@
 
 session_start();
 require_once '../../config.php';
+$uploadDir = '../../uploads/avatars';
 
 //1. verificar que el rol sea administrador
 if ($_SESSION['user_rol'] != 'admin') {
@@ -21,12 +22,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $name = $_POST['name'];
     $subname = $_POST['subname'];
-    $avatar = $_POST['avatar'];
+
     $rol = $_POST['rol'];
+
+
+    if(isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK){
+        $fileTmpPath = $_FILES['avatar']['tmp_name'];
+        $fileName = $_FILES['avatar']['name'];
+
+        $fileNameCmps = explode(".", $fileName);
+        $fileExtension = strtolower(end($fileNameCmps));
+
+        $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+        if(in_array($fileExtension, $allowedExtensions)){
+            $newFileName = md5(time() . $fileName). '.'. $fileExtension;
+            //Ruta final en carpeta uploads
+            $dest_path = $uploadDir . $newFileName;
+            //Mover el archivo de la carpeta temporal a la carpeta uploads
+            if(!move_uploaded_file($fileTmpPath, $dest_path)){
+                die('Error al mover el archivo');
+            }
+        } else {
+            die('Formato de archivo no permitido');
+        }
+    } else {
+        die('Error al subir el archivo');
+    }
 
     //5. Actualizar los datos en la base de datos
     $stmt = $mysqli->prepare("UPDATE USERS SET name=?,subname=?, email=?, avatar=?, rol=? WHERE id=?");
-    $stmt->bind_param("sssssi",  $name, $subname, $email, $avatar, $rol, $id);
+    $stmt->bind_param("sssssi",  $name, $subname, $email, $dest_path, $rol, $id);
     if($stmt->execute()){
         header('Location: ./adminuser.php');
     } else {
@@ -51,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 <div class="container mt-5">
         <h1 class="mb-4">Editar Testimonial</h1>
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="name" class="form-label">Nombre</label>
                 <input type="text" class="form-control" id="name" name="name" value="<?php echo $usuario['name']?>" required>
@@ -65,8 +90,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="text" class="form-control" id="email" name="email"value="<?php echo $usuario['email']?>" required>
             </div>
             <div class="mb-3">
-                <label for="Avatar" class="form-label">Avatar</label>
-                <input type="text" class="form-control" id="Avatar" name="avatar" value="<?php echo $usuario['avatar']?>"required>
+                <label for="avatar" class="form-label">Avatar</label>
+                <input type="file" class="form-control" id="avatar" name="avatar" value="<?php echo $usuario['avatar']?>"required>
             </div>
             
             <div class="mb-3">

@@ -16,7 +16,8 @@ $consulta3noticias = $mysqli->query("SELECT * FROM NEWS ORDER BY data_publicacio
 
 $ultimanoticias = $consulta3noticias->fetch_all(MYSQLI_ASSOC); 
 
-$comentarios = $mysqli->query("SELECT * FROM COMMENTS")
+$comentarios = $mysqli->query();
+var_dump($comentarios)
 
 
 
