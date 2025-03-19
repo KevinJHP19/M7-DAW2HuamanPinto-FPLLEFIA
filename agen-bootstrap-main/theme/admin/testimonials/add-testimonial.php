@@ -1,5 +1,7 @@
 <?php
-    $uploadDir = __DIR__ . '/../../uploads/avatars/';
+session_start();
+require_once '../../config.php';
+    $uploadDir = __DIR__ . '/../../uploads/testimonials/';
 
 //2. comprobar si el formulario ha sido enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -11,9 +13,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $rating = $_POST['rating'];
 
     // Manejo del archivo
-    if(isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK){
-        $fileTmpPath = $_FILES['avatar']['tmp_name'];
-        $fileName = $_FILES['avatar']['name'];
+    if(isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK){
+        $fileTmpPath = $_FILES['foto']['tmp_name'];
+        $fileName = $_FILES['foto']['name'];
 
         $fileNameCmps = explode(".", $fileName);
         $fileExtension = strtolower(end($fileNameCmps));
@@ -30,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if(move_uploaded_file($fileTmpPath, $dest_path)){
                 // Guardar solo la ruta relativa en la base de datos
-                $avatarPathDB = 'uploads/avatars/' . $newFileName;
+                $avatarPathDB = 'uploads/testimonials/' . $newFileName;
             } else {
                 die('Error al mover el archivo');
             }
@@ -44,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     //4. Ejecutar la consulta
     $stmt = $mysqli->prepare("INSERT INTO TESTIMONIONS (foto, name, subname, descripcion, rating) VALUES (?,?,?,?,?)");
-    $stmt->bind_param("ssssi", $foto, $name, $subname, $descripcion, $rating);
+    $stmt->bind_param("ssssi", $dest_path, $name, $subname, $descripcion, $rating);
     if($stmt->execute()){
 
         
