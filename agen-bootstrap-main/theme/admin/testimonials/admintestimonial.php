@@ -78,7 +78,7 @@
     <form action="" method="POST">
     <div class="mb-3">
                 <label for="foto" class="form-label">Foto</label>
-                <input type="text" class="form-control" id="foto" name="foto" required>
+                <input type="file" class="form-control" id="foto" name="foto" required>
             </div>
             <div class="mb-3">
                 <label for="name" class="form-label">Nombre</label>
