@@ -2,7 +2,7 @@
 
 session_start();
 require_once '../../config.php';
-$uploadDir = '../../uploads/avatars';
+$uploadDir = __DIR__ . '/../../uploads/avatars/';
 
 //1. verificar que el rol sea administrador
 if ($_SESSION['user_rol'] != 'admin') {
@@ -22,6 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $name = $_POST['name'];
     $subname = $_POST['subname'];
+    $password = $_POST['password'];
 
     $rol = $_POST['rol'];
 
@@ -38,29 +39,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $newFileName = md5(time() . $fileName). '.'. $fileExtension;
             //Ruta final en carpeta uploads
             $dest_path = $uploadDir . $newFileName;
-            //Mover el archivo de la carpeta temporal a la carpeta uploads
-            if(!move_uploaded_file($fileTmpPath, $dest_path)){
-                die('Error al mover el archivo');
+            // Verificar si la carpeta de destino existe, si no, crearla
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+
+            if(move_uploaded_file($fileTmpPath, $dest_path)){
+                // Guardar solo la ruta relativa en la base de datos
+                $avatarPathDB = 'uploads/avatars/' . $newFileName;
+                } else {
+                    die('Error al mover el archivo');
+                }
+            } else {
+                die('Formato de archivo no permitido');
             }
         } else {
-            die('Formato de archivo no permitido');
+            die('Error al subir el archivo');
         }
-    } else {
-        die('Error al subir el archivo');
-    }
-
+    
+        $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
     //5. Actualizar los datos en la base de datos
-    $stmt = $mysqli->prepare("UPDATE USERS SET name=?,subname=?, email=?, avatar=?, rol=? WHERE id=?");
-    $stmt->bind_param("sssssi",  $name, $subname, $email, $dest_path, $rol, $id);
+    $stmt = $mysqli->prepare("UPDATE USERS SET name=?,subname=?, email=?, avatar=?, password=?,rol=? WHERE id=?");
+    $stmt->bind_param("ssssssi",  $name, $subname, $email, $avatarPathDB,$passwordHashed, $rol, $id);
     if($stmt->execute()){
         header('Location: ./adminuser.php');
     } else {
-        echo 'Error al actualizar el testimonial';
+        echo 'Error al actualizar el usuario';
     }
     $stmt->close();
     $mysqli->close();
     exit();
 }
+
 
 
 
@@ -92,11 +102,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="mb-3">
                 <label for="avatar" class="form-label">Avatar</label>
                 <input type="file" class="form-control" id="avatar" name="avatar" value="<?php echo $usuario['avatar']?>"required>
+                <?php if (!empty($usuario['avatar'])): ?>
+        <img src="../../<?php echo $usuario['avatar']; ?>" alt="Avatar actual" width="100px" height="100px" class="mt-2">
+    <?php endif; ?>
             </div>
             
             <div class="mb-3">
                 <label for="rol" class="form-label">Rol</label>
                 <input type="text" class="form-control" id="rol" name="rol" value="<?php echo $usuario['rol']?>"required>
+            </div>
+            <div class="mb-3">
+              <label for="pasword" class="form-label">Contraseña:</label>
+              <input type="password" class="form-control" id="pasword" name="password" value="<?php echo $usuario['password']?>" required>
             </div>
             <button type="submit" class="btn btn-primary">Guardar</button>
         </form>

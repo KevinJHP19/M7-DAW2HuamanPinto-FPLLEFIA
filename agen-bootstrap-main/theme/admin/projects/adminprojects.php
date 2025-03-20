@@ -1,11 +1,11 @@
 <?php
     session_start();
-    require_once '/workspaces/M7-DAW2HuamanPinto-FPLLEFIA/agen-bootstrap-main/theme/config.php';
+    require_once '../../config.php';
     if ($_SESSION['user_rol'] !== 'admin') {
         echo 'No tiene el rol sea administrador';
         exit();
     }
-    require './add-project.php';
+    require_once './add-project.php';
     $projects = $mysqli->query("SELECT * FROM PROJECTS");
     $projects = $projects->fetch_all(MYSQLI_ASSOC);
     
@@ -48,7 +48,7 @@
             echo '<td>'.$project['tittle'].'</td>';
             echo '<td><a class"btn btn-warning" href='.$project['url'].'>Visitar el sito</a></td>';
             echo '<td>'.$project['descripcion'].'</td>';
-            echo '<td><a href='.$project['thumbnail'].'><img src="'.$project['thumbnail'].'" alt="" width=100px height=70px></a></td>';
+            echo '<td><a href='.$project['thumbnail'].'><img src="../../'.$project['thumbnail'].'" alt="" width=100px height=70px></a></td>';
             echo '<td><a class="btn btn-success" href="edit-project.php?id='.$project['id'].'"><i class="fa-solid fa-pen-to-square"></i></a></td>';
             echo '<td><a class="btn btn-danger" href="delete-project.php?id='.$project['id'].'"><i class="fa-solid fa-trash"></a></td>';
             echo '</tr>';

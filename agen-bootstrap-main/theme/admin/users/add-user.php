@@ -15,6 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $subname = $_POST['subname'];
     $email = $_POST['email'];
     $rol = $_POST['rol'];
+    $password = $_POST['password'];
 
     // Manejo del archivo
     if(isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK){
@@ -46,10 +47,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         die('Error al subir el archivo');
     }
-
+    $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
     //4. Insertar en la base de datos
-    $stmt = $mysqli->prepare("INSERT INTO USERS (name,subname,email,avatar,rol) VALUES (?,?,?,?,?)");
-    $stmt->bind_param("sssss", $name, $subname, $email, $avatarPathDB, $rol);
+    $stmt = $mysqli->prepare("INSERT INTO USERS (name,subname,email,avatar,password,rol) VALUES (?,?,?,?,?,?)");
+    $stmt->bind_param("ssssss", $name, $subname, $email, $avatarPathDB,$passwordHashed, $rol);
 
     if($stmt->execute()){
         echo 'Usuario añadido exitosamente';

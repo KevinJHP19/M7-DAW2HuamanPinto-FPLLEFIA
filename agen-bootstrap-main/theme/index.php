@@ -226,7 +226,7 @@ $testimonios = $testimonios->fetch_all(MYSQLI_ASSOC);
   <div class="container-fluid px-0">
     <div class="row">
       <div class="col-lg-10 mx-auto text-center">
-        <h2>Our Feature Works</h2>
+        <h2>Proyectos</h2>
         <div class="section-border"></div>
       </div>
     </div>

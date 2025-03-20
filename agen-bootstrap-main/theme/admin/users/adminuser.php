@@ -96,6 +96,11 @@
                 <label for="rol" class="form-label">Rol</label>
                 <input type="text" class="form-control" id="rol" name="rol" required>
             </div>
+            <div class="mb-3">
+              <label for="pasword" class="form-label">Contraseña:</label>
+              <input type="password" class="form-control" id="pasword" name="password" required>
+
+            </div>
         
         
         <input type="submit" class="btn btn-primary text-center" value="Enviar">

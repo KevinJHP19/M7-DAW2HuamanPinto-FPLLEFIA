@@ -2,6 +2,7 @@
 
 session_start();
 require_once '../../config.php';
+$uploadDir = __DIR__ . '/../../uploads/projects/';
 
 //1. verificar que el rol sea administrador
 if ($_SESSION['user_rol'] != 'admin') {
@@ -20,14 +21,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_GET['id'];
     $titulo = $_POST['title'];
     $url = $_POST['url'];
-    $imagen = $_POST['thumbnail'];
     $descripcion = $_POST['description'];
+
+    // Manejo del archivo
+    if(isset($_FILES['thumbnail']) && $_FILES['thumbnail']['error'] === UPLOAD_ERR_OK){
+        $fileTmpPath = $_FILES['thumbnail']['tmp_name'];
+        $fileName = $_FILES['thumbnail']['name'];
+
+        $fileNameCmps = explode(".", $fileName);
+        $fileExtension = strtolower(end($fileNameCmps));
+
+        $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+        if(in_array($fileExtension, $allowedExtensions)){
+            $newFileName = md5(time() . $fileName). '.'. $fileExtension;
+            $dest_path = $uploadDir . $newFileName;
+
+            // Verificar si la carpeta de destino existe, si no, crearla
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+
+            if(move_uploaded_file($fileTmpPath, $dest_path)){
+                // Guardar solo la ruta relativa en la base de datos
+                $avatarPathDB = 'uploads/projects/' . $newFileName;
+            } else {
+                die('Error al mover el archivo');
+            }
+        } else {
+            die('Formato de archivo no permitido');
+        }
+    } else {
+        die('Error al subir el archivo');
+    }
 
     //5. Actualizar los datos en la base de datos
     $stmt = $mysqli->prepare("UPDATE PROJECTS SET tittle=?,url=?,thumbnail=?, descripcion=? WHERE id=?");
-    $stmt->bind_param("ssssi", $titulo, $url, $imagen, $descripcion, $id);
+    $stmt->bind_param("ssssi", $titulo, $url, $avatarPathDB, $descripcion, $id);
     if($stmt->execute()){
-        header('Location: ./adminprojects.php');
+        header('Location:./adminprojects.php');  // Redireccionar a la lista de testimonios
+        
     } else {
         echo 'Error al actualizar el proyecto';
     }

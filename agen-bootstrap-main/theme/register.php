@@ -59,11 +59,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mysqli->close();
     }
 }
-    
-
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -113,25 +108,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Registrarse</button>
+            <a href="./login.php" class="btn btn-link">Ya tienes una cuenta?</a>
         </form>
     </div>
-    <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (function () {
-            'use strict'
-            var forms = document.querySelectorAll('.needs-validation')
-            Array.prototype.slice.call(forms)
-                .forEach(function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (!form.checkValidity()) {
-                            event.preventDefault()
-                            event.stopPropagation()
-                        }
-                        form.classList.add('was-validated')
-                    }, false)
-                })
-        })()
-    </script>
+    
     
 </body>
 </html>
