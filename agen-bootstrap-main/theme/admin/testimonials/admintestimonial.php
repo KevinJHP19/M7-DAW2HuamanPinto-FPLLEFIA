@@ -49,7 +49,7 @@
         <?php
             foreach ($testimonials as $testimonial) {
                 echo '<tr>';
-                echo '<td><img src="'.$testimonial['foto'].'" alt="" width=50px height=50px></td>';
+                echo '<td><img src="../../'.$testimonial['foto'].'" alt="" width=50px height=50px></td>';
                 echo '<td>'.$testimonial['name'].'</td>';
                 echo '<td>'.$testimonial['subname'].'</td>';
                 echo '<td>'.$testimonial['descripcion'].'</td>';
@@ -75,7 +75,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
     <div class="mb-3">
                 <label for="foto" class="form-label">Foto</label>
                 <input type="file" class="form-control" id="foto" name="foto" required>

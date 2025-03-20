@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once '../../config.php';
-    $uploadDir = __DIR__ . '/../../uploads/testimonials/';
+$uploadDir = __DIR__ . '/../../uploads/testimonials/';
 
 //2. comprobar si el formulario ha sido enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     //4. Ejecutar la consulta
     $stmt = $mysqli->prepare("INSERT INTO TESTIMONIONS (foto, name, subname, descripcion, rating) VALUES (?,?,?,?,?)");
-    $stmt->bind_param("ssssi", $dest_path, $name, $subname, $descripcion, $rating);
+    $stmt->bind_param("ssssi", $avatarPathDB, $name, $subname, $descripcion, $rating);
     if($stmt->execute()){
 
         

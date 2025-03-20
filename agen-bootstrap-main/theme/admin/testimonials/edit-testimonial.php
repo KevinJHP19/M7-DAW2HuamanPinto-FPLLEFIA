@@ -2,6 +2,7 @@
 
 session_start();
 require_once '../../config.php';
+$uploadDir = __DIR__ . '/../../uploads/testimonials/';
 
 //1. verificar que el rol sea administrador
 if ($_SESSION['user_rol'] != 'admin') {
@@ -18,15 +19,45 @@ $testimonios = $testimonios->fetch_assoc();
 //4. Validar los datos
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_GET['id'];
-    $foto = $_POST['foto'];
+    
     $name = $_POST['name'];
     $subname = $_POST['subname'];
     $descripcion = $_POST['descripcion'];
     $rating = $_POST['rating'];
+    // Manejo del archivo
+    if(isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK){
+        $fileTmpPath = $_FILES['avatar']['tmp_name'];
+        $fileName = $_FILES['avatar']['name'];
+
+        $fileNameCmps = explode(".", $fileName);
+        $fileExtension = strtolower(end($fileNameCmps));
+
+        $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+        if(in_array($fileExtension, $allowedExtensions)){
+            $newFileName = md5(time() . $fileName). '.'. $fileExtension;
+            $dest_path = $uploadDir . $newFileName;
+
+            // Verificar si la carpeta de destino existe, si no, crearla
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+
+            if(move_uploaded_file($fileTmpPath, $dest_path)){
+                // Guardar solo la ruta relativa en la base de datos
+                $avatarPathDB = 'uploads/testimonials/' . $newFileName;
+            } else {
+                die('Error al mover el archivo');
+            }
+        } else {
+            die('Formato de archivo no permitido');
+        }
+    } else {
+        die('Error al subir el archivo');
+    }
 
     //5. Actualizar los datos en la base de datos
     $stmt = $mysqli->prepare("UPDATE TESTIMONIONS SET foto=?,name=?,subname=?, descripcion=?, rating=? WHERE id=?");
-    $stmt->bind_param("ssssii", $foto, $name, $subname, $descripcion, $rating, $id);
+    $stmt->bind_param("ssssii", $avatarPathDB, $name, $subname, $descripcion, $rating, $id);
     if($stmt->execute()){
         header('Location: ./admintestimonial.php');
     } else {
@@ -51,10 +82,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 <div class="container mt-5">
         <h1 class="mb-4">Editar Testimonial</h1>
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="foto" class="form-label">Foto</label>
-                <input type="text" class="form-control" id="foto" name="foto" value="<?php echo $testimonios['foto']?>" required>
+                <input type="file" class="form-control" id="foto" name="avatar" value="<?php echo $testimonios['avatar']?>" required>
             </div>
             <div class="mb-3">
                 <label for="name" class="form-label">Nombre</label>
