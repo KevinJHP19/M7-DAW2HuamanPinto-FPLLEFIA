@@ -52,7 +52,7 @@
                     echo '<td>'.$new['tittle'].'</td>';
                     echo '<td>'.$new['descripcion'].'</td>';
                     echo '<td>'.$new['subtittle'].'</td>';
-                    echo '<td><a href='.$new['thumbnail'].'><img src="'.$new['thumbnail'].'" alt="" width=80px height=50px></a></td>';
+                    echo '<td><a href='.$new['thumbnail'].'><img src="../../'.$new['thumbnail'].'" alt="" width=80px height=50px></a></td>';
                     echo '<td>'.$new['data_publicacio'].'</td>';
                     echo '<td><a class="btn btn-success" href="./edit-new.php?id='.$new['id'].'"><i class="fa-solid fa-pen-to-square"></i></a></td>';
                     echo '<td><a class="btn btn-danger"href="./delete-new.php?id='.$new['id'].'"><i class="fa-solid fa-trash"></i></a></td>';
@@ -73,7 +73,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
     <div class="mb-3">
                 <label for="Titulo" class="form-label">Titulo</label>
                 <input type="text" class="form-control" id="Titulo" name="Titulo" required>
@@ -88,7 +88,7 @@
             </div>
             <div class="mb-3">
                 <label for="Imagen" class="form-label">Imagen</label>
-                <input type="text" class="form-control" id="Imagen" name="Imagen"  required>
+                <input type="file" class="form-control" id="Imagen" name="imagen"  required>
             </div>
         
         

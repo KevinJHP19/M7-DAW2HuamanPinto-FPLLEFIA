@@ -46,6 +46,10 @@
             100% { transform: rotate(360deg); }
 
         }
+        .btn:hover{
+            transform: scale(1.2);
+            transition: 1s;
+        }
     </style>
 </head>
 
@@ -60,17 +64,17 @@
           </div>
     <div class="row text-center">
         <div class="col-6 p-5">
-            <a href="./testimonials/admintestimonial.php" class="btn btn-outline-primary p-3">Testimonios<i class="fa-solid fa-users"></i></a>
+            <a href="./testimonials/admintestimonial.php" class="btn btn-outline-primary p-5">Testimonios<i class="fa-solid fa-users"></i></a>
         </div>
         <div class="col-6 p-5">
-            <a href="./projects/adminprojects.php" class="btn btn-outline-secondary p-3">Proyectos <i class="fa-solid fa-shapes"></i></a>
+            <a href="./projects/adminprojects.php" class="btn btn-outline-secondary p-5">Proyectos <i class="fa-solid fa-shapes"></i></a>
 
         </div>
         <div class="col-6 p-5">
-            <a href="./news/adminnews.php" class="btn btn-outline-success p-3">Noticias <i class="fa-solid fa-newspaper"></i></a>
+            <a href="./news/adminnews.php" class="btn btn-outline-success p-5">Noticias <i class="fa-solid fa-newspaper"></i></a>
         </div>
         <div class="col-6 p-5">
-            <a href="./users/adminuser.php" class="btn btn-outline-info p-3">Usuarios <i class="fa-solid fa-user"></i></a>
+            <a href="./users/adminuser.php" class="btn btn-outline-info p-5">Usuarios <i class="fa-solid fa-user"></i></a>
         </div>        
     </div>
 </div>    

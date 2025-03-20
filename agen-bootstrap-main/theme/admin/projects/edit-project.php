@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 <div class="container mt-5">
         <h1 class="mb-4">Editar proyecto</h1>
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                 <label for="title" class="form-label">Titulo:</label>
                 <input type="text" id="title" name="title" class="form-control" value="<?php echo $proyecto['tittle']?>" required>
@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="mb-3">
                 <label for="image" class="form-label">Imagen:</label>
-                <input type="text" id="thumbnail" name="thumbnail" class="form-control" value="<?php echo $proyecto['thumbnail']?>" required>
+                <input type="file" id="thumbnail" name="thumbnail" class="form-control" value="<?php echo $proyecto['thumbnail']?>" required>
             </div>
             <button type="submit" class="btn btn-primary">Guardar</button>
         </form>
