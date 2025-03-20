@@ -16,8 +16,63 @@ $consulta3noticias = $mysqli->query("SELECT * FROM NEWS ORDER BY data_publicacio
 
 $ultimanoticias = $consulta3noticias->fetch_all(MYSQLI_ASSOC); 
 
-$comentarios = $mysqli->query();
-var_dump($comentarios)
+$comentarios = $mysqli->query("SELECT 
+    COMMENTS.id, 
+    COMMENTS.descripcion, 
+    COMMENTS.data, 
+    USERS.id AS id_user, 
+    USERS.name, 
+    USERS.subname, 
+    USERS.avatar
+FROM COMMENTS
+JOIN USERS ON COMMENTS.id_usuari = USERS.id
+WHERE COMMENTS.id_noticia = $id_noticia -- Sustituye ? por el ID de la noticia deseada
+ORDER BY COMMENTS.data ASC;");
+
+
+//verificar si capto datos
+$repuestas1 = $mysqli->query("SELECT 
+    c.id, 
+    c.descripcion, 
+    c.data, 
+    u.id AS id_user, 
+    u.name, 
+    u.subname, 
+    u.avatar
+FROM COMMENTS c
+JOIN USERS u ON c.id_usuari = u.id
+WHERE c.comment_id = 1  -- Reemplaza X por el ID del comentario padre
+ORDER BY c.data ASC;");
+
+$repuestas2 = $mysqli->query("SELECT 
+    c.id, 
+    c.descripcion, 
+    c.data,
+    u.id AS id_user, 
+    u.name, 
+    u.subname, 
+    u.avatar
+    FROM COMMENTS c
+    JOIN USERS u ON c.id_usuari = u.id
+    WHERE c.comment_id = 2  -- Reemplaza X por el ID del comentario padre
+    ORDER BY c.data ASC;");
+
+$repuestas3 = $mysqli->query("SELECT
+    c.id, 
+    c.descripcion, 
+    c.data, 
+    u.id AS id_user, 
+    u.name,
+    u.subname, 
+    u.avatar
+    FROM COMMENTS c
+    JOIN USERS u ON c.id_usuari = u.id
+    WHERE c.comment_id = 3  -- Reemplaza X por el ID del comentario padre
+    ORDER BY c.data ASC;");
+
+
+
+
 
 
 
@@ -127,52 +182,34 @@ var_dump($comentarios)
     <div class="row">
       <div class="col-lg-10 mx-auto">
         <div class="p-5 mb-4">
+        <?php foreach ($comentarios as $comentario): ?>
           <div class="media border-bottom py-4">
-            <img src="images/user-1.jpg" class="img-fluid align-self-start mr-3" alt="">
+            <img src="<?php echo htmlspecialchars($comentario['avatar']); ?>" class="img-fluid align-self-start mr-3" alt="Avatar" width="93px">
             <div class="media-body">
-              <h5 class="mb-0 text-secondary">Carole Marvin.</h5>
-              <span class="mr-3">15 january 2015 At 10:30 pm</span>
-              <a href="#" class="btn btn-transparent py-1 px-2 "><i class="ti-share-alt"></i> Reply</a>
-              <p>Ne erat velit invidunt his. Eum in dicta veniam interesset, harum fuisset te nam ea cu lupta
-                definitionem.</p>
-              <div class="media my-5">
-                <img src="images/user-2.jpg" class="img-fluid align-self-start mr-3" alt="">
-                <div class="media-body">
-                  <h5 class="mb-0 text-secondary">Jaquan Rolfson.</h5>
-                  <span class="mr-3">15 january 2015 At 10:30 pm</span>
-                  <a href="#" class="btn btn-transparent py-1 px-2 "><i class="ti-share-alt"></i> Reply</a>
-                  <p>Ne erat velit invidunt his. Eum in dicta veniam interesset, harum fuisset te nam ea cu lupta
-                    definitionem.</p>
-                </div>
-              </div>
+              <h5 class="mb-0 text-secondary"><?php echo htmlspecialchars($comentario['name']); ?>.</h5>
+              <span class="mr-3"><?php echo htmlspecialchars($comentario['data']); ?> At <?php echo htmlspecialchars($comentario['hora']); ?></span>
+              <a href="#" class="btn btn-transparent py-1 px-2"><i class="ti-share-alt"></i> Reply</a>
+              <p><?php echo htmlspecialchars($comentario['descripcion']); ?></p>
+              
+              <!-- Respuestas al comentario -->
+              <?php foreach ([$repuestas1, $repuestas2, $repuestas3] as $respuestas): ?>
+                <?php foreach ($respuestas as $respuesta): ?>
+                  <?php if ($respuesta['comment_id'] == $comentario['id']): ?>
+                    <div class="media mt-4">
+                      <img src="<?php echo htmlspecialchars($respuesta['avatar']); ?>" class="img-fluid align-self-start mr-3" alt="Avatar" width="93px">
+                      <div class="media-body">
+                        <h5 class="mb-0 text-secondary"><?php echo htmlspecialchars($respuesta['name']); ?>.</h5>
+                        <span class="mr-3"><?php echo htmlspecialchars($respuesta['data']); ?> At <?php echo htmlspecialchars($respuesta['hora']); ?></span>
+                        <p><?php echo htmlspecialchars($respuesta['descripcion']); ?></p>
+                      </div>
+                    </div>
+                  <?php endif; ?>
+                <?php endforeach; ?>
+              <?php endforeach; ?>
             </div>
           </div>
-          <div class="media py-4">
-            <img src="images/user-1.jpg" class="img-fluid align-self-start mr-3" alt="">
-            <div class="media-body">
-              <h5 class="mb-0 text-secondary">Bruce Bernier.</h5>
-              <span class="mr-3">15 january 2015 At 10:30 pm</span>
-              <a href="#" class="btn btn-transparent py-1 px-2 "><i class="ti-share-alt"></i> Reply</a>
-              <p>Ne erat velit invidunt his. Eum in dicta veniam interesset, harum fuisset te nam ea cu lupta
-                definitionem.</p>
-            </div>
-          </div>
+        <?php endforeach; ?>
         </div>
-        <h4 class="mb-3 pb-3 text-secondary">Leave a Comment</h4>
-        <form action="#" class="row">
-          <div class="col-12">
-            <textarea name="comment" id="comment" placeholder="Message" class="form-control mb-4 border"></textarea>
-          </div>
-          <div class="col-md-5">
-            <input type="text" name="name" id="name" class="form-control mb-4 mb-lg-0 border" placeholder="Name">
-          </div>
-          <div class="col-md-5">
-            <input type="email" name="Email" id="Email" class="form-control mb-4 mb-lg-0 border" placeholder="Email">
-          </div>
-          <div class="col-md-2">
-            <button type="submit" class="btn btn-secondary rounded-0">Send</button>
-          </div>
-        </form>
       </div>
     </div>
   </div>
