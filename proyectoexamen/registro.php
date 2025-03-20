@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div class="container-fluid">
     <div class="container d-flex justify-content-center">
-        <div class="form-container p-5">
+        <div class="form-container p-5 border rounded-5 shadow mt-5">
             <h1 class="text-center">Registro</h1>
             <form action="registro.php" method="POST" enctype="multipart/form-data">
                 <div class="form-group mb-3">

@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+require_once './config.php';
 //1. comprobar si el formulario ha sido enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //2. Recoger los datos del formulario
@@ -44,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <div class="p-5">
+                    <div class="border rounded-5 p-5 mt-5">
                         <div class="">
                             <h2 class="text-center">Iniciar Sesión</h2>
                             <form action="login.php" method="POST">
@@ -57,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <input type="password" class="form-control" id="password" name="password" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
-                                <a href="register.php" class="btn btn-link">Crear una cuenta</a>
+                                <a href="registro.php" class="btn btn-link">Crear una cuenta</a>
                             </form>
                         </div>
             

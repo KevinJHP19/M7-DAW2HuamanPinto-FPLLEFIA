@@ -69,49 +69,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container mt-5">
-        <h2>Registro</h2>
-        <form action="" method="post" class="needs-validation" enctype="multipart/form-data" novalidate>
-            <div class="mb-3">
-                <label for="Nombres" class="form-label">Nombres:</label>
-                <input type="text" class="form-control" id="Nombres" name="Nombres" required>
-                <div class="invalid-feedback">
-                    Por favor, ingrese sus nombres.
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="w-50">
+            <h2 class="text-center mb-4">Registro</h2>
+            <form action="" method="post" class="needs-validation p-5 border rounded shadow" enctype="multipart/form-data" novalidate>
+                <div class="mb-3">
+                    <label for="Nombres" class="form-label">Nombres:</label>
+                    <input type="text" class="form-control" id="Nombres" name="Nombres" required>
+                    <div class="invalid-feedback">
+                        Por favor, ingrese sus nombres.
+                    </div>
                 </div>
-            </div>
-            <div class="mb-3">
-                <label for="Apellidos" class="form-label">Apellidos:</label>
-                <input type="text" class="form-control" id="Apellidos" name="Apellidos" required>
-                <div class="invalid-feedback">
-                    Por favor, ingrese sus apellidos.
+                <div class="mb-3">
+                    <label for="Apellidos" class="form-label">Apellidos:</label>
+                    <input type="text" class="form-control" id="Apellidos" name="Apellidos" required>
+                    <div class="invalid-feedback">
+                        Por favor, ingrese sus apellidos.
+                    </div>
                 </div>
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email:</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-                <div class="invalid-feedback">
-                    Por favor, ingrese un email válido.
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                    <div class="invalid-feedback">
+                        Por favor, ingrese un email válido.
+                    </div>
                 </div>
-            </div>
-            <div class="mb-3">
-                <label for="avatar" class="form-label">Avatar:</label>
-                <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*" required>
-                <div class="invalid-feedback">
-                    Por favor, ingrese un avatar.
+                <div class="mb-3">
+                    <label for="avatar" class="form-label">Avatar:</label>
+                    <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*" required>
+                    <div class="invalid-feedback">
+                        Por favor, ingrese un avatar.
+                    </div>
                 </div>
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password:</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-                <div class="invalid-feedback">
-                    Por favor, ingrese una contraseña.
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                    <div class="invalid-feedback">
+                        Por favor, ingrese una contraseña.
+                    </div>
                 </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Registrarse</button>
-            <a href="./login.php" class="btn btn-link">Ya tienes una cuenta?</a>
-        </form>
+                <button type="submit" class="btn btn-primary">Registrarse</button>
+                <a href="./login.php" class="btn btn-link">¿Ya tienes una cuenta?</a>
+            </form>
+        </div>
     </div>
-    
-    
 </body>
 </html>

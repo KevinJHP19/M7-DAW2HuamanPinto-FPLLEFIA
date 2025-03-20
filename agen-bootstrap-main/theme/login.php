@@ -46,28 +46,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar session</title>
+    <title>Iniciar sesión</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<body class="container p-5">
-    <h1 class="text-center">Inicion de sesion</h1>
-<form action="" method="post" class="p-5">
-        
-        <div class="mb-3">
-        <label for="email" class="form-label">Email:</label><br>
-        <input type="email" id="email" name="email" class="form-control" required> 
-        </div>
-        <div class="mb-3">
-        <label for="password" class="form-label">Password:</label>
-        <input type="password" id="password" name="password" class="form-control" required>
-        </div>
-        <div class="mb3">
-            
-        </div>
-        
-
-        <input type="submit" value="Iniciar sesión" class="btn btn-primary">
-        <a href="register.php" class="text-decoration-none btn btn-outline-primary" >Crear una cuenta</a>
-    </form>
+<body class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="w-50">
+        <h1 class="text-center mb-4">Inicio de sesión</h1>
+        <form action="" method="post" class="p-5 border  shadow rounded-5">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+            <div class="d-flex justify-content-between">
+                <input type="submit" value="Iniciar sesión" class="btn btn-primary">
+                <a href="register.php" class="text-decoration-none btn btn-outline-primary">Crear una cuenta</a>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
