@@ -12,16 +12,16 @@ if ($_SESSION['user_rol'] != 'admin') {
 //2. agarramos el id
 $id = $_GET['id'];
 //3. Ejecutar la consulta
-$usuario = $mysqli->query("SELECT * FROM USERS WHERE id = $id");
+$usuario = $mysqli->query("SELECT * FROM usuarios WHERE id = $id");
 $usuario = $usuario->fetch_assoc();
 
 
 //4. Validar los datos
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_GET['id'];
-    $email = $_POST['email'];
-    $name = $_POST['name'];
-    $subname = $_POST['subname'];
+    $email = $_POST['correo'];
+    $name = $_POST['nombre'];
+    $subname = $_POST['apellidos'];
     $password = $_POST['password'];
 
     $rol = $_POST['rol'];
@@ -59,10 +59,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
         $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
     //5. Actualizar los datos en la base de datos
-    $stmt = $mysqli->prepare("UPDATE USERS SET name=?,subname=?, email=?, avatar=?, password=?,rol=? WHERE id=?");
+    $stmt = $mysqli->prepare("UPDATE usuarios SET nombre=?,apellidos=?, correo=?, avatar=?, password=?,rol=? WHERE id=?");
     $stmt->bind_param("ssssssi",  $name, $subname, $email, $avatarPathDB,$passwordHashed, $rol, $id);
     if($stmt->execute()){
-        header('Location: ./adminuser.php');
+        header('Location: ../menuadmin.php?usuario=true');
     } else {
         echo 'Error al actualizar el usuario';
     }
@@ -89,19 +89,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form action="" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="name" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="name" name="name" value="<?php echo $usuario['name']?>" required>
+                <input type="text" class="form-control" id="name" name="nombre" value="<?php echo $usuario['nombre']?>" required>
             </div>
             <div class="mb-3">
                 <label for="subname" class="form-label">Apellido</label>
-                <input type="text" class="form-control" id="subname" name="subname" value="<?php echo $usuario['subname']?>" required>
+                <input type="text" class="form-control" id="subname" name="apellidos" value="<?php echo $usuario['apellidos']?>" required>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="text" class="form-control" id="email" name="email"value="<?php echo $usuario['email']?>" required>
+                <input type="text" class="form-control" id="email" name="correo"value="<?php echo $usuario['correo']?>" required>
             </div>
             <div class="mb-3">
                 <label for="avatar" class="form-label">Avatar</label>
-                <input type="file" class="form-control" id="avatar" name="avatar" value="<?php echo $usuario['avatar']?>"required>
+                <input type="file" class="form-control" id="avatar" name="avatar" value="<?php echo $usuario['avatar']?>" required>
                 <?php if (!empty($usuario['avatar'])): ?>
         <img src="../../<?php echo $usuario['avatar']; ?>" alt="Avatar actual" width="100px" height="100px" class="mt-2">
     <?php endif; ?>

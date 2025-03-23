@@ -1,99 +1,128 @@
 <?php
- session_start();
-
-
- require_once 'config.php';
-  if(!isset($_SESSION['user_id'])){
+session_start();
+require_once 'config.php';
+if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit();
-  }
-  $result = $mysqli->query("SELECT * FROM usuarios WHERE id = $_SESSION[user_id]");
-  $user = $result->fetch_assoc();
-  
-
+}
+$result = $mysqli->query("SELECT * FROM usuarios WHERE id = $_SESSION[user_id]");
+$user = $result->fetch_assoc();
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina familia Becerra</title>
+    <title>Página Principal</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://kit.fontawesome.com/147cf78807.js" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card img {
+            height: 150px;
+            object-fit: cover;
+        }
+        .container-fluid, .container {
+            padding: 15px;
+        }
+        @media (max-width: 768px) {
+            .card {
+                margin-bottom: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-dark bg-dark" aria-label="First navbar example">
-            <div class="container-fluid">
-                <a class="navbar-brand ps-3" href="#"><?php echo 'Hola ' . $user['nombre'] . " " . $user['apellidos'] ?> <img src="./<?php echo $user['avatar'] ?>" alt="" class="rounded-5 border-bg-white" width="50px" height="50px">
-                    <?php
-                    if ($user['rol'] == 'admin') {
-                        echo '<a class="btn btn-secondary text-white" href="admin/index.php">Panel Admin</a>';
-                    }
-                    ?>
-                </a>
-                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse" id="navbarsExample01">
-                    <ul class="navbar-nav me-auto mb-2">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                    </ul>
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container-fluid d-flex justify-content-between align-items-center">
+                <div>
+                    <a class="navbar-brand ps-3" href="#">
+                        <?php echo 'Hola ' . $user['nombre'] . " " . $user['apellidos']; ?>
+                        <img src="./<?php echo $user['avatar']; ?>" alt="Avatar" class="rounded-5 border bg-white" width="50" height="50">
+                    </a>
+                </div>
+                <div>
+                    <?php if ($user['rol'] == 'admin') {
+                        echo '<a class="btn btn-secondary text-white me-2" href="admin/menuadmin.php">Panel Admin</a>';
+                    } ?>
+                    <a href="logout.php" class="btn btn-primary">Cerrar sesión</a>
                 </div>
             </div>
         </nav>
     </header>
-    <main>
-        <div class="container-fluid">
-            <h1>Productos del textil</h1>
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Producto</th>
-                            <th scope="col">Descripcion</th>
-                            <th scope="col">Cantidad</th>
-                            <th scope="col">Precio</th>
-                            <th scope="col">Fecha subida</th>
-                            <th scope="col">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Título 1</td>
-                            <td>Contenido 1</td>
-                            <td>2022-01-01</td>
-                            <td><a href="" class="btn btn-success">Editar</a></td>
-                            <td><a href="" class="btn btn-danger">Eliminar</a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Título 2</td>
-                            <td>Contenido 2</td>
-                            <td>2022-01-02</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Título 3</td>
-                            <td>Contenido 3</td>
-                            <td>2022-01-03</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>Título 4</td>
-                        </tr>
-                    </tbody>
-                </table>
+    <main class="container mt-4">
+        <section class="text-center mb-5">
+            <h1>Bienvenido a nuestra tienda</h1>
+            <p>Descubre los mejores productos en souvenirs, textiles y juguetes.</p>
+        </section>
+        <section>
+            <h2 class="text-center">Productos más vendidos</h2>
+            <div class="container">
+                <h3 class="mt-4">Souvenirs</h3>
+                <div class="row row-cols-1 row-cols-md-3 g-3">
+                    <?php $souvenirs = [['titulo' => 'Imán Barcelona', 'desc' => 'Recuerdo de Barcelona', 'img' => 'https://via.placeholder.com/150', 'precio' => '5€'], 
+                                        ['titulo' => 'Llaveros Madrid', 'desc' => 'Llaveros icónicos', 'img' => 'https://via.placeholder.com/150', 'precio' => '3€'], 
+                                        ['titulo' => 'Taza España', 'desc' => 'Taza decorativa', 'img' => 'https://via.placeholder.com/150', 'precio' => '8€']];
+                    foreach ($souvenirs as $producto) { ?>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="<?php echo $producto['img']; ?>" class="card-img-top" alt="<?php echo $producto['titulo']; ?>">
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo $producto['titulo']; ?></h5>
+                                <p class="card-text"><?php echo $producto['desc']; ?></p>
+                                <p class="fw-bold">Precio: <?php echo $producto['precio']; ?></p>
+                                <a href="#" class="btn btn-primary">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <?php } ?>
+                </div>
             </div>
-        </div>
+            <div class="container mt-4">
+                <h3>Textil</h3>
+                <div class="row row-cols-1 row-cols-md-3 g-3">
+                    <?php $textil = [['titulo' => 'Camiseta España', 'desc' => 'Camiseta con bandera', 'img' => 'https://via.placeholder.com/150', 'precio' => '15€'],
+                                     ['titulo' => 'Bufanda Madrid', 'desc' => 'Bufanda de lana', 'img' => 'https://via.placeholder.com/150', 'precio' => '12€'],
+                                     ['titulo' => 'Gorra Barcelona', 'desc' => 'Gorra deportiva', 'img' => 'https://via.placeholder.com/150', 'precio' => '10€']];
+                    foreach ($textil as $producto) { ?>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="<?php echo $producto['img']; ?>" class="card-img-top" alt="<?php echo $producto['titulo']; ?>">
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo $producto['titulo']; ?></h5>
+                                <p class="card-text"><?php echo $producto['desc']; ?></p>
+                                <p class="fw-bold">Precio: <?php echo $producto['precio']; ?></p>
+                                <a href="#" class="btn btn-primary">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <?php } ?>
+                </div>
+            </div>
+            <div class="container mt-4">
+                <h3>Juguetes</h3>
+                <div class="row row-cols-1 row-cols-md-3 g-3">
+                    <?php $juguetes = [['titulo' => 'Muñeca clásica', 'desc' => 'Muñeca de colección', 'img' => 'https://via.placeholder.com/150', 'precio' => '20€'],
+                                       ['titulo' => 'Coche de juguete', 'desc' => 'Coche a escala', 'img' => 'https://via.placeholder.com/150', 'precio' => '10€'],
+                                       ['titulo' => 'Pelota de fútbol', 'desc' => 'Pelota profesional', 'img' => 'https://via.placeholder.com/150', 'precio' => '15€']];
+                    foreach ($juguetes as $producto) { ?>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="<?php echo $producto['img']; ?>" class="card-img-top" alt="<?php echo $producto['titulo']; ?>">
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo $producto['titulo']; ?></h5>
+                                <p class="card-text"><?php echo $producto['desc']; ?></p>
+                                <p class="fw-bold">Precio: <?php echo $producto['precio']; ?></p>
+                                <a href="#" class="btn btn-primary">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <?php } ?>
+                </div>
+            </div>
+        </section>
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
