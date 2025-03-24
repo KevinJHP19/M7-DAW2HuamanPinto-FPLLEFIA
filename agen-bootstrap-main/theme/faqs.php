@@ -35,11 +35,21 @@ require_once './config.php';
 
   <!-- Main Stylesheet -->
   <link href="css/style.css" rel="stylesheet">
-  
+  <script src="https://kit.fontawesome.com/147cf78807.js" crossorigin="anonymous"></script>
   <!--Favicon-->
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
   <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <style>
+    .nav-item a:hover i {
+      animation: rotar 2s infinite linear;
+    }
+    @keyframes rotar{
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+            100% { transform: rotate(360deg); }
 
+        }
+  </style>
 </head>
 
 <body>

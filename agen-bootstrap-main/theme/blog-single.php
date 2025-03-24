@@ -54,6 +54,18 @@ ORDER BY c.data ASC;")->fetch_all(MYSQLI_ASSOC);
   <link href="css/style.css" rel="stylesheet">
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
   <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <script src="https://kit.fontawesome.com/147cf78807.js" crossorigin="anonymous"></script>
+  <style>
+    .nav-item a:hover i {
+      animation: rotar 2s infinite linear;
+    }
+    @keyframes rotar{
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+            100% { transform: rotate(360deg); }
+
+        }
+  </style>
 </head>
 <body>
 <?php include 'header.php'; ?>

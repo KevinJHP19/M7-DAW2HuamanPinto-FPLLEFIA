@@ -37,7 +37,7 @@
           <li class="nav-item">
             <a href="logout.php" class="btn btn-primary">Cerrar sesión</a>
           </li>
-          <?php if($_SESSION['user_rol'] == 'admin'): ?>
+          <?php if($_SESSION['user_rol'] === 'admin'): ?>
             <li class="nav-item">
               <a href="admin/admin.php"  width=100px height=100px style="color: gray; font-size: 50px; margin-left:10px;"><i class="fa-solid fa-gear" ></i></a>
             </li>
