@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once '/workspaces/M7-DAW2HuamanPinto-FPLLEFIA/agen-bootstrap-main/theme/config.php';
+    require_once '../../config.php';
     if ($_SESSION['user_rol'] !== 'admin') {
         echo 'No tiene el rol sea administrador';
         exit();

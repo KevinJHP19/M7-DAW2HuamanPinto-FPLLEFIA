@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once './config.php';
 
 $testimonios = $mysqli->query("SELECT * FROM TESTIMONIONS ORDER BY id");
