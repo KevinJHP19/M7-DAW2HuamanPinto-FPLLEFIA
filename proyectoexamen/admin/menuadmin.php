@@ -29,9 +29,9 @@ if ($user['rol'] !== 'admin') {
         <a class="navbar-brand" href="#">Admin Panel </a>
         <a href="../logout.php" class="btn btn-danger">Cerrar sesión</a>
     </header>
-    <div class="container-fluid">
+    <div class="container-fluid " height="300%">
         <div class="row">
-            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar py-3">
+            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar py-3 ">
                 <ul class="nav flex-column">
                     <li class="nav-item"><a class="nav-link" href="menuadmin.php?usuario=true"><i class="fa-solid fa-users p-2"></i> Usuarios </a></li>
                     <li class="nav-item"><a class="nav-link" href="menuadmin.php?producto=true"><i class="fa-solid fa-truck p-2"></i>Productos</a></li>
