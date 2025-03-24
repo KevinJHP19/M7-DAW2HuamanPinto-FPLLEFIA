@@ -26,6 +26,7 @@ $productos = $productos->fetch_all(MYSQLI_ASSOC);
     <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
   Agregar Producto
   </button>
+  <a href="../agregarcategoria.php" class="btn btn-outline-primary mb-3">Agregar categoria</a>
     <div class="table-responsive">
         <table class="table table-striped table-bordered">
             <thead class="thead-dark">
@@ -37,7 +38,6 @@ $productos = $productos->fetch_all(MYSQLI_ASSOC);
                     <th>Precio</th>
                     <th>Stock</th>
                     <th>Fecha de subida</th>
-
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -68,6 +68,7 @@ $productos = $productos->fetch_all(MYSQLI_ASSOC);
             </div>
             <div class="modal-body">
                 <form action="" method="post" enctype="multipart/form-data">
+                    
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
                         <input type="text" class="form-control" id="nombre" name="nombre" required>

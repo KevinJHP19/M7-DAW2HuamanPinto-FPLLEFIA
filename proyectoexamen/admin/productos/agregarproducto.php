@@ -1,7 +1,7 @@
 
 <?php
 
-session_start();
+
 
 $uploadDir = __DIR__ . '/../../uploads/articulos/'; // Ruta absoluta
 
