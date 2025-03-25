@@ -1,7 +1,11 @@
 <?php
-
+session_start();
 require_once '../config.php'; // Asegurar conexión a la BD
 
+if ($_SESSION['user_rol'] !== 'admin') {
+    header('Location: ../../index.php');
+    exit();
+}
 
 $buscar = isset($_POST['buscar']) ? trim($_POST['buscar']) : '';
 
@@ -131,6 +135,54 @@ if (!empty($buscar)) {
     <?php else: ?>
         <p class="alert alert-warning">No se encontraron resultados para "<?php echo htmlspecialchars($buscar); ?>"</p>
     <?php endif; ?>
+</div>
+
+<!-- Modal para agregar usuario -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Agregar Usuario</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="./usuarios/agregarusuarios.php" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="apellidos" class="form-label">Apellidos</label>
+                        <input type="text" class="form-control" id="apellidos" name="apellidos" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="correo" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="correo" name="correo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rol" class="form-label">Rol</label>
+                        <select class="form-control" id="rol" name="rol" required>
+                            <option value="admin">Admin</option>
+                            <option value="usuario">Usuario</option>
+                            <option value="trabajador">Trabajador</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="avatar" class="form-label">Avatar</label>
+                        <input type="file" class="form-control" id="avatar" name="avatar" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Agregar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
