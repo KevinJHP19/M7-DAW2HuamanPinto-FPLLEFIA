@@ -1,11 +1,6 @@
 <?php
-session_start();
-require_once '../config.php'; // Asegurar conexión a la BD
 
-if ($_SESSION['user_rol'] !== 'admin') {
-    header('Location: ../../index.php');
-    exit();
-}
+require_once '../config.php'; // Asegurar conexión a la BD
 
 $buscar = isset($_POST['buscar']) ? trim($_POST['buscar']) : '';
 

@@ -152,7 +152,7 @@ if (!empty($buscar)) {
             <div class="card mb-3">
                 <div class="card-body">
                     <div class="d-flex align-items-center mb-3">
-                        <img src="../../<?php echo $producto['url']; ?>" alt="<?php echo $producto['nombre']; ?>" width="50" height="50" class="me-3">
+                        <img src="<?php echo $producto['url']; ?>" alt="<?php echo $producto['nombre']; ?>" width="50" height="50" class="me-3">
                         <div>
                             <h5 class="card-title mb-0"><?php echo $producto['nombre']; ?></h5>
                             <p class="card-text"><i class="<?php echo $producto['categoria_icono']; ?>"></i> <?php echo $producto['categoria_nombre']; ?></p>
