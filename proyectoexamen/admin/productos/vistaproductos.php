@@ -1,11 +1,8 @@
 <?php
-session_start();
+
 
 require_once '../config.php';
-if ($_SESSION['user_rol'] !== 'admin') {
-    header('Location: ../../index.php');
-    exit();
-}
+
 $buscar = isset($_POST['buscar']) ? trim($_POST['buscar']) : '';
 
 
@@ -118,7 +115,7 @@ $categorias = $categorias->fetch_all(MYSQLI_ASSOC);
         <tbody>
             <?php foreach ($productos as $producto) :?>
                 <tr>
-                    <td data-label="Imagen"><img src="../../<?php echo $producto['url'];?>" alt="<?php echo $producto['nombre'];?>" width="50" height="50"></td>
+                    <td data-label="Imagen"><img src="../<?php echo $producto['url'];?>" alt="<?php echo $producto['nombre'];?>" width="50" height="50"></td>
                     <td data-label="Producto"><?php echo $producto['nombre'];?></td>
                     <td data-label="Categoria">
                         <i class="<?php echo $producto['icono']; ?>"></i>
@@ -138,7 +135,7 @@ $categorias = $categorias->fetch_all(MYSQLI_ASSOC);
 <div class="card-container">
     <?php foreach ($productos as $producto) :?>
         <div class="card">
-            <img  src="../../<?php echo $producto['url'];?>" alt="<?php echo $producto['nombre'];?>">
+            <img  src="../<?php echo $producto['url'];?>" alt="<?php echo $producto['nombre'];?>">
             <div class="card-body">
                 <div><strong>Producto:</strong> <?php echo $producto['nombre'];?></div>
                 <div><strong>Categoria:</strong> <i class="<?php echo $producto['icono']; ?>"></i> <?php echo $producto['categoria_nombre']; ?></div>

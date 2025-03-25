@@ -116,7 +116,7 @@ if (!empty($buscar)) {
                 <?php foreach ($productos as $producto) : ?>
                     <tr>
                         <td>
-                            <img src="../../<?php echo $producto['url']; ?>" alt="<?php echo $producto['nombre']; ?>" width="50" height="50">
+                            <img src="<?php echo $producto['url']; ?>" alt="<?php echo $producto['nombre']; ?>" width="50" height="50">
                         </td>
                         <td><?php echo $producto['nombre']; ?></td>
                         <td>

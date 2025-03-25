@@ -1,11 +1,8 @@
 <?php
-session_start();
+
 require_once '../../config.php'; // Conexión a la BD
 
-//1. verificar que el rol sea administrador
-if ($_SESSION['user_rol'] != 'admin') {
-    die('No tiene el rol de administrador');
-}
+
 
 //2. comprobar si el formulario ha sido enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

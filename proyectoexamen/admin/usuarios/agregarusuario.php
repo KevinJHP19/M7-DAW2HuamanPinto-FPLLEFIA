@@ -1,14 +1,12 @@
 <?php
-session_start();
+
 
 require_once '../../config.php'; // Conexión a la BD
 
 
 $uploadDir = __DIR__ . '/../../uploads/avatars/'; // Ruta absoluta
 
-if ($_SESSION['user_rol'] != 'admin') {
-    die('No tiene el rol de administrador');
-}
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['nombre'];
