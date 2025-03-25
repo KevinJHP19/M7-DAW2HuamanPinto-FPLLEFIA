@@ -1,7 +1,8 @@
-
 <?php
-
 session_start();
+  
+
+require_once '../../config.php'; // Conexión a la BD
 
 $uploadDir = __DIR__ . '/../../uploads/articulos/'; // Ruta absoluta
 
@@ -9,6 +10,8 @@ $uploadDir = __DIR__ . '/../../uploads/articulos/'; // Ruta absoluta
 if ($_SESSION['user_rol'] != 'admin') {
     die('No tiene el rol de administrador');
 }
+
+
 
 //2. comprobar si el formulario ha sido enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -55,13 +58,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ssidsi", $name, $description, $stock, $price, $avatarPathDB, $category);
 
     if($stmt->execute()){
-        echo 'Producto añadido exitosamente';
+        
     } else {
         echo 'Error al añadir el producto';
     }
     $stmt->close();
     $mysqli->close();
-    header("Location: vistaproductos.php");
+    header("Location: ../menuadmin.php?producto=true");
     exit();
 }
 ?>

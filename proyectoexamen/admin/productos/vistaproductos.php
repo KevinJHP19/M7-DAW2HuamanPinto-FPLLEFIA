@@ -1,19 +1,42 @@
 <?php
 session_start();
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+
 require_once '../config.php';
 if ($_SESSION['user_rol'] !== 'admin') {
     header('Location: ../../index.php');
     exit();
 }
+$buscar = isset($_POST['buscar']) ? trim($_POST['buscar']) : '';
 
-$productos = $mysqli->query("
-    SELECT productos.*, categorias.icono, categorias.nombre AS categoria_nombre 
-    FROM productos 
-    JOIN categorias ON productos.categoria_id = categorias.id
-");
-$productos = $productos->fetch_all(MYSQLI_ASSOC);
+
+// Consulta con búsqueda segura
+if (!empty($buscar)) {
+    $stmt = $mysqli->prepare("
+        SELECT productos.*, categorias.icono, categorias.nombre AS categoria_nombre 
+        FROM productos 
+        JOIN categorias ON productos.categoria_id = categorias.id
+        WHERE productos.nombre LIKE ? 
+        OR productos.descripcion LIKE ? 
+        OR categorias.nombre LIKE ?
+    ");
+    if ($stmt) {
+        $likeBuscar = "%$buscar%";
+        $stmt->bind_param("sss", $likeBuscar, $likeBuscar, $likeBuscar);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $productos = $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+    } else {
+        die("Error en la consulta: " . $mysqli->error);
+    }
+} else {
+    $result = $mysqli->query("
+        SELECT productos.*, categorias.icono, categorias.nombre AS categoria_nombre 
+        FROM productos 
+        JOIN categorias ON productos.categoria_id = categorias.id
+    ");
+    $productos = $result->fetch_all(MYSQLI_ASSOC) ;
+}
 $categorias = $mysqli->query("SELECT * FROM categorias");
 $categorias = $categorias->fetch_all(MYSQLI_ASSOC);
 
@@ -71,6 +94,12 @@ $categorias = $categorias->fetch_all(MYSQLI_ASSOC);
     <button type="button" class="btn btn-outline-primary mb-3" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
         Agregar Categoria
     </button>
+    <form action="" method="post">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Buscar producto..." name="buscar" value="<?php echo htmlspecialchars($buscar); ?>">
+            <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+        </div>
+    </form>
     <div class="table-responsive">
     <div class="table-responsive">
     <table class="table table-striped table-bordered">
@@ -138,7 +167,7 @@ $categorias = $categorias->fetch_all(MYSQLI_ASSOC);
                     </div>
                     <div class="mb-3">
                         <label for="icono_categoria" class="form-label">Icono de la Categoria</label>
-                        <input type="text" class="form-control" id="icono_categoria" name="icono_categoria" required>
+                        <input type="text" class="form-control" id="icono_categoria" name="icono_categoria" placeholder="fa-solid fa-play" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

@@ -63,7 +63,7 @@ $categoria3 = $categoria3->fetch_assoc();
                     <?php if ($user['rol'] == 'admin') {
                         echo '<a class="btn btn-secondary text-white me-2" href="admin/menuadmin.php">Panel Admin</a>';
                     }else if($user['rol'] == 'trabajador'){
-                        echo '<a class="btn btn-secondary text-white me-2" href="trabajador/menutrabajador.php">Panel Trabajador</a>';
+                        echo '<a class="btn btn-secondary text-white me-2" href="paneltrabajador.php">Panel Trabajador</a>';
                     }
                      ?>
                     <a href="logout.php" class="btn btn-primary">Cerrar sesión</a>

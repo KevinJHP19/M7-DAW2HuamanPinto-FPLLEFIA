@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../config.php';
+require_once '../../config.php'; // Conexión a la BD
 
 //1. verificar que el rol sea administrador
 if ($_SESSION['user_rol'] != 'admin') {
@@ -25,7 +25,7 @@ if($stmt->execute()){
 }
 $stmt->close();
 $mysqli->close();
-header("Location: vistausuarios.php");
+header("Location: ../menuadmin.php?producto=true");
 exit();
 
 ?>

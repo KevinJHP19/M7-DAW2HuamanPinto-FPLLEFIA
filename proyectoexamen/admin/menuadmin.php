@@ -27,7 +27,10 @@ if ($user['rol'] !== 'admin') {
 <body>
     <header class="navbar navbar-dark bg-dark p-3">
         <a class="navbar-brand" href="#">Admin Panel </a>
+        <div>
+        <a href="../index.php" class="btn btn-primary">Volver al inicio</a>
         <a href="../logout.php" class="btn btn-danger">Cerrar sesión</a>
+        </div>
     </header>
     <div class="container-fluid " height="300%">
         <div class="row">

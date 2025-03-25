@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
 <div class="container mt-5">
-        <h1 class="mb-4">Editar Testimonial</h1>
+        <h1 class="mb-4">Editar Usuario</h1>
         <form action="" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="name" class="form-label">Nombre</label>

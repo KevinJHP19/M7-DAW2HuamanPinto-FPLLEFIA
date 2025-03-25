@@ -36,6 +36,24 @@ if (!empty($buscar)) {
     <title>Vista de Usuarios</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/147cf78807.js" crossorigin="anonymous"></script>
+    <style>
+        /* Ocultar tabla en pantallas pequeñas */
+        @media (max-width: 768px) {
+            .table-responsive {
+                display: none;
+            }
+            .card-container {
+                display: block;
+            }
+        }
+
+        /* Ocultar tarjetas en pantallas grandes */
+        @media (min-width: 769px) {
+            .card-container {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
 <div class="container mt-5">
@@ -52,6 +70,7 @@ if (!empty($buscar)) {
         </div>
     </form>
 
+    <!-- Tabla de usuarios -->
     <?php if (!empty($usuarios)): ?>
         <div class="table-responsive">
             <table class="table table-striped table-bordered">
@@ -86,57 +105,36 @@ if (!empty($buscar)) {
                 </tbody>
             </table>
         </div>
+
+        <!-- Tarjetas de usuarios -->
+        <div class="card-container">
+            <?php foreach ($usuarios as $usuario) : ?>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="../<?php echo $usuario['avatar']; ?>" alt="Avatar" width="50" height="50" class="me-3">
+                            <div>
+                                <h5 class="card-title mb-0"><?php echo $usuario['nombre']; ?></h5>
+                                <p class="card-text"><?php echo $usuario['apellidos']; ?></p>
+                            </div>
+                        </div>
+                        <p class="card-text"><strong>Email:</strong> <?php echo $usuario['correo']; ?></p>
+                        <p class="card-text"><strong>Rol:</strong> <?php echo $usuario['rol']; ?></p>
+                        <div class="d-flex justify-content-between">
+                            <a class="btn btn-warning me-3" href="./usuarios/editarusuarios.php?id=<?php echo $usuario['id']; ?>">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                            <a class="btn btn-danger" href="./usuarios/eliminarusuarios.php?id=<?php echo $usuario['id']; ?>">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
     <?php else: ?>
         <p class="alert alert-warning">No se encontraron resultados para "<?php echo htmlspecialchars($buscar); ?>"</p>
     <?php endif; ?>
-</div>
-
-<!-- Modal para agregar usuario -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Agregar Usuario</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="./usuarios/agregarusuario.php" method="post" enctype="multipart/form-data">
-                    <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="apellidos" class="form-label">Apellidos</label>
-                        <input type="text" class="form-control" id="apellidos" name="apellidos" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="correo" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="correo" name="correo" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="rol" class="form-label">Rol</label>
-                        <select class="form-control" id="rol" name="rol" required>
-                            <option value="admin">Admin</option>
-                            <option value="usuario">Usuario</option>
-                            <option value="trabajador">Trabajador</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="avatar" class="form-label">Avatar</label>
-                        <input type="file" class="form-control" id="avatar" name="avatar" required>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Agregar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
