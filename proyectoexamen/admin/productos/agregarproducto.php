@@ -1,7 +1,7 @@
 
 <?php
 
-
+session_start();
 
 $uploadDir = __DIR__ . '/../../uploads/articulos/'; // Ruta absoluta
 
@@ -14,7 +14,7 @@ if ($_SESSION['user_rol'] != 'admin') {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //3. Recoger los datos del formulario
     $name = $_POST['nombre'];
-    $category = $_POST['categoria'];
+    $category = $_POST['categoria_id'];
     $price = $_POST['precio'];
     $stock = $_POST['stock'];
     $description = $_POST['descripcion'];
@@ -49,18 +49,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         die('Error al subir el archivo');
     }
-    $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
+
     //4. Insertar en la base de datos
-    $stmt = $mysqli->prepare("INSERT INTO productos (nombre,categoria,descripcion,num_cantidad,precio,url) VALUES (?,?,?,?,?,?)");
-    $stmt->bind_param("sssids", $name, $category, $description, $stock, $price, $avatarPathDB);
+    $stmt = $mysqli->prepare("INSERT INTO productos (nombre,descripcion,num_cantidad,precio,url,categoria_id) VALUES (?,?,?,?,?,?)");
+    $stmt->bind_param("ssidsi", $name, $description, $stock, $price, $avatarPathDB, $category);
 
     if($stmt->execute()){
-        echo 'Usuario añadido exitosamente';
+        echo 'Producto añadido exitosamente';
     } else {
-        echo 'Error al añadir el usuario';
+        echo 'Error al añadir el producto';
     }
     $stmt->close();
+    $mysqli->close();
+    header("Location: vistaproductos.php");
+    exit();
 }
 ?>
-    
-    

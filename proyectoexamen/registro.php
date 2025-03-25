@@ -76,10 +76,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
-<body>
+<body style="background-image: url(https://c8.alamy.com/comp/MDWC7W/a-view-looking-down-passeig-maritim-in-santa-susanna-spain-MDWC7W.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    
+    "> 
     <div class="container-fluid">
     <div class="container d-flex justify-content-center">
-        <div class="form-container p-5 border rounded-5 shadow mt-5">
+        <div class="form-container p-5 border rounded-5 shadow mt-5 bg-white">
             <h1 class="text-center">Registro</h1>
             <form action="registro.php" method="POST" enctype="multipart/form-data">
                 <div class="form-group mb-3">

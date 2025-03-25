@@ -101,7 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="mb-3">
                 <label for="avatar" class="form-label">Avatar</label>
-                <input type="file" class="form-control" id="avatar" name="avatar" value="<?php echo $usuario['avatar']?>" required>
+                <input type="file" class="form-control" id="avatar" name="avatar" value="<?php echo $usuario['avatar']?>" >
                 <?php if (!empty($usuario['avatar'])): ?>
         <img src="../../<?php echo $usuario['avatar']; ?>" alt="Avatar actual" width="100px" height="100px" class="mt-2">
     <?php endif; ?>
@@ -109,7 +109,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             <div class="mb-3">
                 <label for="rol" class="form-label">Rol</label>
-                <input type="text" class="form-control" id="rol" name="rol" value="<?php echo $usuario['rol']?>"required>
+               
+                <select class="form-select" id="rol" name="rol" required>
+                  <option value="">Seleccione un rol</option>
+                  <option value="admin">Administrador</option>
+                  <option value="trabajador">Trabajador</option>
+                  <option value="usuario">Usuario</option>
+                </select>
+
+                
             </div>
             <div class="mb-3">
               <label for="pasword" class="form-label">Contraseña:</label>
